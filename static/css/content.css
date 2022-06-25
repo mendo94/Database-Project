@@ -1,0 +1,36 @@
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow: visible;
+}
+
+.content-btn-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  /* width: 24%; */
+  max-width: 220px;
+  text-align: center;
+}
+
+.content-btn {
+  width: 45%;
+
+  display: block;
+  border: none;
+  padding: 2.1em 5em;
+  background-color: #fff;
+  color: #fff;
+  /* font-family: "TitilliumText22LRegular", Arial, sans-serif; */
+  font-weight: bold;
+  font-size: 1.4em;
+  border-radius: 0px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1.1);
+  height: 60px;
+  text-align: center;
+  opacity: 0.5px;
+}
