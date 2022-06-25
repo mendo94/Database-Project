@@ -18,30 +18,30 @@ app.use("/img", express.static("static"));
 app.use(express.urlencoded());
 
 // GET login page
-app.get('/login', (req, res) => {
-  res.send('login')
-})
+app.get("/login", (req, res) => {
+  res.send("login");
+});
 
 // GET register page
-app.get('/register', (req, res) => {
-  res.render('register')
-})
+app.get("/register", (req, res) => {
+  res.render("register");
+});
 
 // POST register page
-app.post('/register', async (req, res) => {
-
-  const username = req.body.username
-  const password = req.body.password
+app.post("/register", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
   const user = await models.User.build({
     username: username,
-    password: password
-  })
+    password: password,
+  });
 
   user.save.then(() => {
-    res.redirect('login')
-  }) 
-  
+    res.redirect("login");
+  });
+});
+
 app.get("/homepage", (req, res) => {
   res.render("homepage");
 });
@@ -49,4 +49,3 @@ app.get("/homepage", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
