@@ -1,21 +1,26 @@
 const express = require("express");
 const app = express();
 const mustacheExpress = require("mustache-express");
-// const cors = require("cors");
 const session = require("express-session");
-// const VIEWS_PATH = path.join(__dirname, "/views");
+const path = require("path");
+const VIEWS_PATH = path.join(__dirname, "/views");
 
-app.use("/js", express.static("static"));
-app.use("/css", express.static("static"));
-app.use("/img", express.static("static"));
-
+const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
 app.set("views", VIEWS_PATH);
 app.set("view engine", "mustache");
 
-app.use(express.urlencoded());
-// app.use(cors());
+app.use(express.static("static"));
+app.use("/js", express.static("static"));
+app.use("/css", express.static("static"));
+app.use("/img", express.static("static"));
 
-http.listen(8080, () => {
-  console.log("Server is running...");
+app.use(express.urlencoded());
+
+app.get("/homepage", (req, res) => {
+  res.render("homepage");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

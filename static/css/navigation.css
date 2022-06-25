@@ -1,0 +1,111 @@
+/*
+*
+* ==========================================
+* NAVIGATION MENU
+* ==========================================
+*
+*/
+
+.vertical-nav {
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+  position: fixed;
+  top: 0;
+}
+
+/* for toggle behavior */
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+#sidebar {
+  position: relative;
+  background: linear-gradient(to right, #b497da, #976e9e);
+}
+
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+
+.m-0 {
+  padding-left: 8px;
+}
+
+.anchor-link {
+  font-size: 1.4rem;
+}
+
+.anchor-link:hover {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
+}
+
+.anchor-link:active {
+  background-color: rgb(202, 130, 202);
+}
+
+.signout {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  padding-left: 14px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+  #content.active {
+    margin-left: 17rem;
+    width: calc(100% - 17rem);
+  }
+}
+
+/*
+*
+* ==========================================
+* MAIN CONTENT TO BE LAYED OUT AROUND NAVBAR
+* ==========================================
+*
+*/
+
+body {
+  background: #575b5e;
+  background: -webkit-linear-gradient(to right, #b497da, #976e9e);
+  background: linear-gradient(to right, #b497da, #976e9e);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+
+.text-gray {
+  color: #aaa;
+}
