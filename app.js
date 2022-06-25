@@ -4,6 +4,7 @@ const mustacheExpress = require("mustache-express");
 const session = require("express-session");
 const path = require("path");
 const VIEWS_PATH = path.join(__dirname, "/views");
+const models = require("./models");
 
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
@@ -42,9 +43,17 @@ app.post("/register", async (req, res) => {
   });
 });
 
-app.get("/homepage", (req, res) => {
-  res.render("homepage");
+///////////////////////////////////////////////////////////////
+//              DASHBOARD
+///////////////////////////////////////////////////////////////
+
+app.get("/homepage", async (req, res) => {
+  const containers = await models.Container.findAll({});
+
+  res.render("homepage", { containers: containers });
 });
+
+///////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
