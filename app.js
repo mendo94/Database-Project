@@ -4,7 +4,17 @@ const mustacheExpress = require("mustache-express");
 const session = require("express-session");
 const path = require("path");
 const VIEWS_PATH = path.join(__dirname, "/views");
-const models = require("./models");
+global.models = require("./models");
+
+
+///////////////////////////////////////////////////////////////
+//              Setup route for client side access
+///////////////////////////////////////////////////////////////
+const clientRoutes = require('./routes/clientInteraction')
+
+app.use('/client', clientRoutes)
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
