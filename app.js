@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mustacheExpress = require("mustache-express");
 const session = require("express-session");
+const bcrypt = require("bcryptjs");
 const path = require("path");
 const VIEWS_PATH = path.join(__dirname, "/views");
 global.models = require("./models");
@@ -16,8 +17,17 @@ app.use('/client', clientRoutes)
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 
+const SALT_ROUNDS = 10;
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
+
+app.use(
+  session({
+    secret: "somesecret",
+    resave: true,
+    saveUninitialized: false,
+  })
+);
 app.set("views", VIEWS_PATH);
 app.set("view engine", "mustache");
 
@@ -33,24 +43,61 @@ dragPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 ///////////////////////////////////////////////////////////////
 //              LOGIN
 ///////////////////////////////////////////////////////////////
-// GET register page
-app.get("/register", (req, res) => {
-  res.render("register");
+// POST register page
+app.post("/login", async (req, res) => {
+  const { username, password, first_name, last_name } = req.body;
+
+  const persistedUser = await models.User.findOne({
+    where: {
+      username: username,
+    },
+  });
+  if (persistedUser == null) {
+    bcrypt.hash(password, SALT_ROUNDS, async (error, hash) => {
+      if (error) {
+        res.render("/login", { message: "Error, user was not created" });
+      } else {
+        const user = models.User.build({
+          username: username,
+          password: hash,
+          first_name: first_name,
+          last_name: last_name,
+        });
+        const savedUser = await user.save();
+        if (savedUser != null) {
+          res.redirect("/homepage");
+        } else {
+          res.render("/login", { message: "Username already exists!" });
+        }
+      }
+    });
+  } else {
+    res.render("/login", { message: "Username already exists!" });
+  }
 });
 
-// POST register page
-app.post("/register", async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
 
-  const user = await models.User.build({
-    username: username,
-    password: password,
+  const user = await models.User.findOne({
+    where: {
+      username: username,
+    },
   });
-
-  user.save.then(() => {
-    res.redirect("login");
-  });
+  if (user != null) {
+    bcrypt.compare(password, user.password, (error, result) => {
+      if (result) {
+        if (req.session) {
+          req.session.user = { userId: user.id };
+          res.redirect("/homepage");
+        }
+      } else {
+        res.render("/login", { message: "Incorrect username or password" });
+      }
+    });
+  } else {
+    res.redirect("/login", { message: "Incorrect username or password" });
+  }
 });
 
 app.get("/login", async (req, res) => {
@@ -101,19 +148,6 @@ app.get("/homepage", async (req, res) => {
   res.render("homepage", { item: item, drag: dragPositions });
 });
 
-// app.get("/homepage/items/:itemId", async (req, res) => {
-//   const itemId = parseInt(req.params.itemId);
-
-//   const item = await models.Item.findByPk(itemId, {
-//     include: [
-//       {
-//         model: models.Container,
-//         as: "container",
-//       },
-//     ],
-//   });
-//   res.render("homepage", { item: item });
-// });
 ///////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
