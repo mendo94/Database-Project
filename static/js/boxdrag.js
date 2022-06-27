@@ -8,7 +8,6 @@ item.addEventListener('dragstart', dragStart);
 
 function dragStart(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
-    console.log(ev)
     
 }
 
@@ -46,7 +45,7 @@ function drop(ev) {
         ev.preventDefault();
         ev.target.classList.remove('drag-over')
         var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
+        ev.target.parentElement.appendChild(document.getElementById(data));
         // display the draggable element
         document.getElementById(data).classList.remove('hide');
     }

@@ -15,6 +15,11 @@
 
 
   <div id="box-position-holder">
+    <div class="box-storage">
+      <div class="box-drag-position" id="drag{{number}}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+        Place Box Here
+      </div>
+    </div>
     {{#item}}
       <div class="card dragBox boxItem" ondragstart="dragStart(event)" draggable="true" id="{{id}}">
         <div class="card-body">
