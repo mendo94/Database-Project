@@ -104,6 +104,9 @@ app.get("/homepage", async (req, res) => {
 // });
 ///////////////////////////////////////////////////////////////
 
+// table for household
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
