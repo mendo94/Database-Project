@@ -1,41 +1,31 @@
-<!-- Page content holder -->
-<div class="page-content p-5" id="content">
-  <!-- Toggle button -->
-  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
-      class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
-  <h1 class="text-white">
-    DASHBOARD
-  </h1>
-
-
-  <section class="content-btn-container">
+<section class="content-btn-container">
+  <button id="sidebarCollapse" type="button"
+    class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
+    New
+    Room</button>
+  <a href="/homepage/create-box">
     <button id="sidebarCollapse" type="button"
-      class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
-      New
-      Room</button>
-    <a href="/homepage/create-box">
-      <button id="sidebarCollapse" type="button"
-        class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create a
-        new
-        box</button>
-    </a>
-  </section>
-  <!--viewing containers -->
-  <main>
+      class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create a
+      new
+      box</button>
+  </a>
+</section>
+<!--viewing containers -->
+<main>
 
-    {{#containers}}
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">{{box}}</h4>
-        <p class="card-text">
-          {{item}}
-        </p>
-        <a href="#!" class="card-link">Edit Box</a>
-        <a href="#!" class="card-link">Delete Box</a>
-      </div>
+  {{#containers}}
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{box}}</h4>
+      <p class="card-text">
+        {{item}}
+      </p>
+      <a href="#!" class="card-link">Edit Box</a>
+      <a href="#!" class="card-link">Delete Box</a>
     </div>
-    {{/containers}}
+  </div>
+  {{/containers}}
 
 
-  </main>
+</main>
 </div>
