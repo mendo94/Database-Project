@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/register-login.css">
 
 
   <title>Login Page</title>
@@ -28,14 +29,18 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
         <li class="nav-item active">
-          <a class="nav-link" href="#!">Get Started<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#!"><button class="show-modal">Get Started</button><span
+              class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#!">Login</a>
+          <a class="nav-link" href="#!"><button class="show-login-modal">Login</button></a>
         </li>
       </ul>
     </div>
   </nav>
+
+
+
 
   <!-- HERO CONTENT -->
 
@@ -71,7 +76,91 @@
 
     </div>
   </section>
+  <!-- Registration Modal -->
 
+  <div class="registration-menu hidden">
+    <div class="img-container">
+      <img src="/img/logo.png" alt="">
+    </div>
+    <button class="close-modal">&times;</button>
+    <form action="/login" method="POST">
+      <div class="first-last-name form-outline mb-4">
+        <input type="text" name="first_name" class="form-control form-control-lg" />
+        <label class="form-label">Your First Name</label>
+        <input type="text" name="last_name" class="form-control form-control-lg" />
+        <label class="form-label">Your Last Name</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="text" name="username" class="form-control form-control-lg" />
+        <label class="form-label">Create Username</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" name="password" class="form-control form-control-lg" />
+        <label class="form-label">Create Password</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" class="form-control form-control-lg" />
+        <label class="form-label">Confirm password</label>
+      </div>
+
+      <div class="form-check d-flex justify-content-center mb-5">
+        <input class="form-check-input me-2" type="checkbox" />
+        <label class="form-check-label">
+          I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+        </label>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+      </div>
+
+      <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+          class="fw-bold text-body"><u>Login
+            here</u></a></p>
+    </form>
+  </div>
+  <div class="overlay hidden"></div>
+
+
+  <!-- Login Modal -->
+
+  <div class="login-menu hide">
+    <div class="img-container">
+      <img src="/img/logo.png" alt="">
+    </div>
+    <button class="close-login-modal">&times;</button>
+    <form action="/login" method="POST">
+      <div class="form-outline mb-4">
+        <input type="text" name="username" class="form-control form-control-lg" />
+        <label class="form-label">Enter Username</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" name="password" class="form-control form-control-lg" />
+        <label class="form-label">Enter Password</label>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+      </div>
+
+      <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="#!" class="fw-bold text-body"><u>Sign
+            up!</u></a></p>
+    </form>
+  </div>
+  <div class="login-overlay hide"></div>
+
+  {{#message}}
+  <div class="alert alert-danger" role="alert">
+
+    {{message}}
+  </div>
+  {{/message}}
+
+  <script src="/js/register-login.js"></script>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
