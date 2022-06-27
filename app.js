@@ -18,6 +18,8 @@ app.use("/img", express.static("static"));
 
 app.use(express.urlencoded());
 
+dragPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
 ///////////////////////////////////////////////////////////////
 //              LOGIN
 ///////////////////////////////////////////////////////////////
@@ -86,7 +88,7 @@ app.get("/homepage", async (req, res) => {
     ],
   });
   // res.json(item);
-  res.render("homepage", { item: item });
+  res.render("homepage", { item: item, drag: dragPositions });
 });
 
 // app.get("/homepage/items/:itemId", async (req, res) => {

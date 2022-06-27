@@ -14,20 +14,28 @@
 <main>
 
 
+  <div id="box-position-holder">
+    {{#item}}
+      <div class="card dragBox boxItem" ondragstart="dragStart(event)" draggable="true" id="{{id}}">
+        <div class="card-body">
+          <h4 class="card-title">{{container.box}}</h4>
+          <p class="card-text">
+          {{name}}
+          </p>
+          <a href="#!" class="card-link">Edit Box</a>
+          <a href="#!" class="card-link">Delete Box</a>
+        </div>
+      </div>
+      {{/item}}
 
-  {{#item}}
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">{{container.box}}</h4>
-      <p class="card-text">
-        {{name}}
-      </p>
-      <a href="#!" class="card-link">Edit Box</a>
-      <a href="#!" class="card-link">Delete Box</a>
+      {{#drag}}
+    <div class="box-drag-position" id="drag{{number}}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+      
+
     </div>
+    {{/drag}}
   </div>
-  {{/item}}
-
+  
 
 </main>
 </div>

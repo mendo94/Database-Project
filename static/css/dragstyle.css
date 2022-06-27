@@ -1,0 +1,26 @@
+.hide {
+    display: none;
+}
+
+.testArea {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.drag-over {
+    border: dashed 3px red;
+}
+
+.box-drag-position {
+    width: 10rem;
+    height: 10rem;
+    background-color: green;
+    margin: 1rem;
+}
+
+#box-position-holder {
+    
+    display: flex;
+    flex-wrap: wrap;
+}
