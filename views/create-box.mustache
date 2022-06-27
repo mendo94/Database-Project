@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {{>header}}
+  <title>Create New Box</title>
+</head>
+
+<body>
+  {{>navigation-menu}}
+
+  <!-- Page content holder -->
+  <div class="page-content p-5" id="content">
+    <!-- Toggle button -->
+    <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
+        class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
+    <h1 class="text-white">
+      DASHBOARD
+    </h1>
+
+    <form action="/homepage/create-box" method="POST">
+      <div class="form-group">
+        <label for="formGroupExampleInput bg-light">Give your container a category</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter new category">
+      </div>
+      <button id="sidebarCollapse" type="button"
+        class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
+        New
+        Container</button>
+    </form>
+
+
+    {{>footer}}
+</body>
+
+</html>

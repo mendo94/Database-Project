@@ -18,11 +18,6 @@ app.use("/img", express.static("static"));
 
 app.use(express.urlencoded());
 
-// GET login page
-app.get("/login", (req, res) => {
-  res.send("login");
-});
-
 // GET register page
 app.get("/register", (req, res) => {
   res.render("register");
@@ -51,6 +46,23 @@ app.get("/homepage", async (req, res) => {
   const containers = await models.Container.findAll({});
 
   res.render("homepage", { containers: containers });
+});
+
+app.get("/login", async (req, res) => {
+  res.render("login");
+});
+app.get("/homepage/create-box", async (req, res) => {
+  res.render("create-box");
+});
+
+app.post("/homepage/create-box", async (req, res) => {
+  const box = req.body.box;
+
+  const conatiner = await models.Container.build({
+    box: box,
+  });
+  console.log(conatiner);
+  res.render("/homeage/create-box");
 });
 
 ///////////////////////////////////////////////////////////////
