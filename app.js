@@ -18,6 +18,9 @@ app.use("/img", express.static("static"));
 
 app.use(express.urlencoded());
 
+///////////////////////////////////////////////////////////////
+//              LOGIN
+///////////////////////////////////////////////////////////////
 // GET register page
 app.get("/register", (req, res) => {
   res.render("register");
@@ -38,33 +41,67 @@ app.post("/register", async (req, res) => {
   });
 });
 
+app.get("/login", async (req, res) => {
+  res.render("login");
+});
+
 ///////////////////////////////////////////////////////////////
 //              DASHBOARD
 ///////////////////////////////////////////////////////////////
 
-app.get("/homepage", async (req, res) => {
-  const containers = await models.Container.findAll({});
+// app.get("/homepage", async (req, res) => {
+//   const containers = await models.Container.findAll({});
 
-  res.render("homepage", { containers: containers });
-});
+//   res.render("homepage", { containers: containers });
+// });
 
-app.get("/login", async (req, res) => {
-  res.render("login");
-});
 app.get("/homepage/create-box", async (req, res) => {
   res.render("create-box");
 });
 
 app.post("/homepage/create-box", async (req, res) => {
   const box = req.body.box;
+  // const containerId = parseInt(req.body.containerId)
 
-  const conatiner = await models.Container.build({
+  const container = models.Container.build({
     box: box,
   });
-  console.log(conatiner);
-  res.render("/homeage/create-box");
+  const persistedContainer = await container.save();
+  if (persistedContainer != null) {
+    res.redirect("/homepage");
+  } else {
+    res.render("/homeage/create-box", {
+      message: "Unable to create container",
+    });
+  }
 });
 
+app.get("/homepage", async (req, res) => {
+  const item = await models.Item.findAll({
+    include: [
+      {
+        model: models.Container,
+        as: "container",
+      },
+    ],
+  });
+  // res.json(item);
+  res.render("homepage", { item: item });
+});
+
+// app.get("/homepage/items/:itemId", async (req, res) => {
+//   const itemId = parseInt(req.params.itemId);
+
+//   const item = await models.Item.findByPk(itemId, {
+//     include: [
+//       {
+//         model: models.Container,
+//         as: "container",
+//       },
+//     ],
+//   });
+//   res.render("homepage", { item: item });
+// });
 ///////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
