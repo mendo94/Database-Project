@@ -3,7 +3,7 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  overflow: visible;
+  overflow: auto;
 }
 
 .content-btn-container {

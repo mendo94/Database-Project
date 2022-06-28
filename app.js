@@ -7,13 +7,12 @@ const path = require("path");
 const VIEWS_PATH = path.join(__dirname, "/views");
 global.models = require("./models");
 
-
 ///////////////////////////////////////////////////////////////
 //              Setup route for client side access
 ///////////////////////////////////////////////////////////////
-const clientRoutes = require('./routes/clientInteraction')
+const clientRoutes = require("./routes/clientInteraction");
 
-app.use('/client', clientRoutes)
+app.use("/client", clientRoutes);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 
@@ -21,6 +20,7 @@ const SALT_ROUNDS = 10;
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
 
+app.use(express.urlencoded());
 app.use(
   session({
     secret: "somesecret",
@@ -36,15 +36,13 @@ app.use("/js", express.static("static"));
 app.use("/css", express.static("static"));
 app.use("/img", express.static("static"));
 
-app.use(express.urlencoded());
-
-dragPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+dragPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 ///////////////////////////////////////////////////////////////
 //              LOGIN
 ///////////////////////////////////////////////////////////////
-// POST register page
-app.post("/login", async (req, res) => {
+
+app.post("/landing", async (req, res) => {
   const { username, password, first_name, last_name } = req.body;
 
   const persistedUser = await models.User.findOne({
@@ -55,7 +53,7 @@ app.post("/login", async (req, res) => {
   if (persistedUser == null) {
     bcrypt.hash(password, SALT_ROUNDS, async (error, hash) => {
       if (error) {
-        res.render("/login", { message: "Error, user was not created" });
+        res.render("/landing", { message: "Error, user was not created" });
       } else {
         const user = models.User.build({
           username: username,
@@ -65,15 +63,19 @@ app.post("/login", async (req, res) => {
         });
         const savedUser = await user.save();
         if (savedUser != null) {
-          res.redirect("/homepage");
+          res.redirect("/login");
         } else {
-          res.render("/login", { message: "Username already exists!" });
+          res.render("/landing", { message: "Username already exists!" });
         }
       }
     });
   } else {
-    res.render("/login", { message: "Username already exists!" });
+    res.render("landing-page", { message: "Username already exists!" });
   }
+});
+
+app.get("/landing", (req, res) => {
+  res.render("landing-page");
 });
 
 app.post("/login", async (req, res) => {
@@ -92,7 +94,7 @@ app.post("/login", async (req, res) => {
           res.redirect("/homepage");
         }
       } else {
-        res.render("/login", { message: "Incorrect username or password" });
+        res.render("login", { message: "Incorrect username or password" });
       }
     });
   } else {
@@ -100,7 +102,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/login", async (req, res) => {
+app.get("/login", (req, res) => {
   res.render("login");
 });
 
@@ -146,6 +148,13 @@ app.get("/homepage", async (req, res) => {
   });
   // res.json(item);
   res.render("homepage", { item: item, drag: dragPositions });
+});
+
+app.post("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy();
+  }
+  res.redirect("/landing");
 });
 
 ///////////////////////////////////////////////////////////////
