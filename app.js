@@ -96,6 +96,14 @@ app.get("/", (req, res) => {
 
 ///////////////////////////////////////////////////////////////
 
+// table for household
+app.get('/household-members', (req, res) => {
+  res.render('household-members')
+})
+
+app.get('/create-room', (req, res) => {
+  
+})
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
