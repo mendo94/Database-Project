@@ -59,22 +59,26 @@ function createTable () {
               <p class="card-text">
               
               </p>
-              <a href="#!" class="card-link">Edit Box</a>
-              <a href="#!" class="card-link">Delete Box</a>
+              <a href="#!" class="card-link">Edit Item</a>
+              <a href="/object-handling/delete/item/${item.id}" class="card-link">Delete Item</a>
             </div>
           </div>`
         })
-        return `<div class="box-storage" id="container-${container.id}">
+        return `<div class="card box-storage" id="container-${container.id}">
         <h1>${container.box}</h1>
-        ${itemsElements.join()}
+        <a href="/object-handling/delete/box/${container.id}">Delete Box</a>
+
+        <a href="/object-handling/create-item/${container.box}/${container.id}">Make new Item for Box</a>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
-          Place Box Here
+            ${itemsElements.join('')}
+          Drag Item Here
         </div>
+        
       </div>`
     })
     console.log(containerElements)
 
-    boxOrganizer.innerHTML = containerElements
+    boxOrganizer.innerHTML = containerElements.join('')
 }
 
 function drop(ev) {
@@ -85,7 +89,7 @@ function drop(ev) {
         let movedElement = document.getElementById(data)
         let containerElement = ev.target.parentElement
 
-        let originalContainerId = movedElement.parentElement.id.split('-')[1]
+        let originalContainerId = movedElement.parentElement.parentElement.id.split('-')[1]
         let originalContainer = currentStorage.find(container => {
             return container.id == originalContainerId
         })

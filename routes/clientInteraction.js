@@ -18,6 +18,8 @@ clientRouter.get('/space/items', async (req, res) => {
     res.json(item)
 })
 
+
+
 clientRouter.post('/items/:postItem/:containerId', async (req, res) => {
     const updateItem = await models.Item.update({
         containerId: req.params.containerId
