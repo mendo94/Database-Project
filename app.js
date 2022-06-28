@@ -157,6 +157,10 @@ app.post("/logout", (req, res) => {
   res.redirect("/landing");
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/homepage')
+})
+
 ///////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => {

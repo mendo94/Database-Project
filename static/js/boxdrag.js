@@ -39,15 +39,3 @@ function dragLeave(ev) {
         ev.target.classList.remove('drag-over')
     }
 }
-
-function drop(ev) {
-    if(ev.target.id.match('drag')) {
-        ev.preventDefault();
-        ev.target.classList.remove('drag-over')
-        var data = ev.dataTransfer.getData("text");
-        ev.target.parentElement.appendChild(document.getElementById(data));
-        // display the draggable element
-        document.getElementById(data).classList.remove('hide');
-    }
-    
-}

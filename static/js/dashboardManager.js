@@ -102,10 +102,6 @@ function drop(ev) {
         .then(message => {
             debug.log('storage change successful!')
         })
-        console.log(currentStorage)
-
-        containerElement.appendChild(movedElement);
-        // display the draggable element
         document.getElementById(data).classList.remove('hide');
         setupDashboard()
     }
