@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       models.Container.belongsTo(models.Room, {
-        as: "user",
-        foreignKey: "ownerId",
+        as: "room",
+        foreignKey: "roomId",
       });
     }
   }

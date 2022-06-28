@@ -1,16 +1,17 @@
 const boxOrganizer = document.getElementById('box-position-holder')
+const roomId = document.getElementById('roomId')
+console.log(roomId)
 
 let currentStorage = []
 let storagesAvailable = []
 let itemsAvailable = []
 
 async function getCurrentItems() {
-    await fetch("./client/space/items")
+    await fetch("../client/space/items")
     .then(raw => {
         return raw.json()
     })
     .then(info => {
-        currentStorage = info
         console.log(currentStorage)
         itemsAvailable = info
     })
@@ -19,7 +20,7 @@ async function getCurrentItems() {
 }
 
 async function getCurrentStorage() {
-    await fetch("./client/space/boxes")
+    await fetch(`../client/space/boxes/sort/${roomId.innerHTML}`)
     .then(raw => {
         return raw.json()
     })

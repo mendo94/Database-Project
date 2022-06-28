@@ -61,8 +61,14 @@ app.use("/users", userRouter);
 
 app.get("/homepage", async (req, res) => {
   // res.json(item);
-  res.render("homepage");
+  res.render("room-dashboard-display");
 });
+
+app.get("/room-view/:roomId", async (req, res) => {
+  const room = await models.Room.findByPk(req.params.roomId);
+  console.log(room);
+  res.render(`homepage`, {currentRoom: room.name, roomId: room.id});
+})
 
 app.post("/logout", (req, res) => {
   if (req.session) {
