@@ -25,7 +25,7 @@
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand mr-4" href="#"><img class="logo-image" src="img/navbar-logo.png" alt=""></a>
+    <a class="navbar-brand mr-4" href="#"><img class="logo-image" src="/img/navbar-logo.png" alt=""></a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -34,7 +34,7 @@
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/login"><button class="show-login-modal">Login</button></a>
+          <a class="nav-link" href="/users/login"><button class="show-login-modal">Login</button></a>
         </li>
       </ul>
     </div>
@@ -86,7 +86,7 @@
       <img src="/img/logo.png" alt="">
     </div>
     <button class="close-modal">&times;</button>
-    <form action="/registration" method="POST">
+    <form action="/users/registration" method="POST">
       <div class="first-last-name form-outline mb-4">
         <input type="text" name="first_name" class="form-control form-control-lg" />
         <label class="form-label">Your First Name</label>
@@ -114,13 +114,13 @@
         <label class="form-check-label">
           I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
         </label>
-      </div>j
+      </div>
 
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
       </div>
 
-      <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
+      <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/users/login"
           class="fw-bold text-body"><u>Login
             here</u></a></p>
     </form>
@@ -135,7 +135,7 @@
       <img src="/img/logo.png" alt="">
     </div>
     <button class="close-login-modal">&times;</button>
-    <form action="/login" method="POST">
+    <form action="/users/login" method="POST">
       <div class="form-outline mb-4">
         <input type="text" name="username" class="form-control form-control-lg" />
         <label class="form-label">Enter Username</label>
