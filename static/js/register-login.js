@@ -52,3 +52,5 @@ document.addEventListener("keydown", function (e) {
     closeLoginModal();
   }
 });
+
+window.onload = openLoginModal;

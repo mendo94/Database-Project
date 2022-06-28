@@ -9,28 +9,8 @@ html {
   box-sizing: border-box;
 }
 
-.modal-container {
-  position: relative;
-}
-
-/* .show-modal {
-  font-size: 2rem;
-  font-weight: 600;
-  padding: 1.75rem 3.5rem;
-  margin: 5rem 2rem;
-  border: none;
-  background-color: #fff;
-  color: #444;
-  border-radius: 10rem;
-  cursor: pointer;
-} */
-
 .gradient-custom-4 {
-  background: linear-gradient(
-    to right,
-    rgba(132, 250, 176, 1),
-    rgba(143, 211, 244, 1)
-  );
+  background: linear-gradient(to right, rgb(132, 250, 236), rgb(102, 197, 244));
 }
 
 .close-modal {
@@ -177,6 +157,7 @@ html {
 /* ****************************************** */
 .navbar {
   height: 75px;
+  /* background-color: #b0bec5; */
 }
 
 .navbar-logo {
@@ -199,7 +180,7 @@ html {
   flex-direction: row;
 }
 .content span {
-  color: green;
+  color: #bdbdbd;
   font-weight: 500;
 }
 .content p {
