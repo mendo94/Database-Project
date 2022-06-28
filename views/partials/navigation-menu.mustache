@@ -48,12 +48,15 @@
       </a>
     </li>
   </ul>
-  <div class="nav-item signout anchor-link">
-    <a href="#" class="nav-link text-white font-italic">
-      <i class="fa-solid fa-right-from-bracket"></i>
-      Signout
-    </a>
-  </div>
+  <form method="POST" action="/logout">
+    <div class="nav-item signout anchor-link">
+      <input type="hidden" value={{username}} name="username" />
+      <a href="/landing" class="nav-link text-white font-italic">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Signout
+      </a>
+    </div>
+  </form>
 </div>
 <!-- End vertical navbar -->
 

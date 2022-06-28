@@ -21,7 +21,7 @@
   width: calc(100% - 17rem);
   margin-left: 17rem;
   transition: all 0.4s;
-  position: fixed;
+  position: absolute;
   top: 0;
   float: right;
 }
@@ -95,7 +95,7 @@ body {
   background: -webkit-linear-gradient(to right, #b497da, #976e9e);
   background: linear-gradient(to right, #b497da, #976e9e);
   min-height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .separator {
