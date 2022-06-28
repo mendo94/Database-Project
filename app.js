@@ -164,12 +164,12 @@ app.get('/', (req, res) => {
 ///////////////////////////////////////////////////////////////
 
 // table for household
-app.get('/household-members', (req, res) => {
+app.get('/homepage/household-members', (req, res) => {
   res.render('household-members')
 })
 
-app.get('/create-room', (req, res) => {
-  
+app.get('/homepage/create-room', (req, res) => {
+  res.render('homepage')
 })
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

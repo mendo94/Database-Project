@@ -1,6 +1,6 @@
 <section class="content-btn-container">
   <button id="sidebarCollapse" type="button"
-    class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
+    class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4" name="createRoomBtn">Create
     New
     Room</button>
   <a href="/homepage/create-box">
@@ -22,6 +22,11 @@
     </div>
   </div>
   
+  <form action="/create-room" method="POST">
+    <button name="createRoomBtn">Create new room</button>
+    <label>Enter a room</label>
+    <input type="text" name="roomTextbox">
+  </form>
 
 </main>
 </div>
