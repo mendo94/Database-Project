@@ -42,7 +42,7 @@ dragPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 //              LOGIN
 ///////////////////////////////////////////////////////////////
 
-app.post("/landing", async (req, res) => {
+app.post("/registration", async (req, res) => {
   const { username, password, first_name, last_name } = req.body;
 
   const persistedUser = await models.User.findOne({
@@ -53,7 +53,7 @@ app.post("/landing", async (req, res) => {
   if (persistedUser == null) {
     bcrypt.hash(password, SALT_ROUNDS, async (error, hash) => {
       if (error) {
-        res.render("/landing", { message: "Error, user was not created" });
+        res.render("/registration", { message: "Error, user was not created" });
       } else {
         const user = models.User.build({
           username: username,
@@ -65,17 +65,17 @@ app.post("/landing", async (req, res) => {
         if (savedUser != null) {
           res.redirect("/login");
         } else {
-          res.render("/landing", { message: "Username already exists!" });
+          res.render("/registration", { message: "Username already exists!" });
         }
       }
     });
   } else {
-    res.render("landing-page", { message: "Username already exists!" });
+    res.render("registration", { message: "Username already exists!" });
   }
 });
 
-app.get("/landing", (req, res) => {
-  res.render("landing-page");
+app.get("/registration", (req, res) => {
+  res.render("registration");
 });
 
 app.post("/login", async (req, res) => {
@@ -154,12 +154,12 @@ app.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy();
   }
-  res.redirect("/landing");
+  res.redirect("/registration");
 });
 
-app.get('/', (req, res) => {
-  res.redirect('/homepage')
-})
+app.get("/", (req, res) => {
+  res.redirect("/homepage");
+});
 
 ///////////////////////////////////////////////////////////////
 
