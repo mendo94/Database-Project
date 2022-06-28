@@ -12,7 +12,7 @@ global.models = require("./models");
 
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
-const userRouter = require("./routes/loginRegistration");
+
 app.use(
   session({
     secret: "somesecret",
@@ -21,7 +21,7 @@ app.use(
   })
 );
 app.use(express.urlencoded());
-app.use("/users", userRouter);
+
 app.set("views", VIEWS_PATH);
 app.set("view engine", "mustache");
 
@@ -40,6 +40,10 @@ app.use("/client", clientRoutes);
 const objectRoutes = require("./routes/boxItemHandling");
 
 app.use("/object-handling", objectRoutes);
+
+const userRouter = require("./routes/loginRegistration");
+
+app.use("/users", userRouter);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 
@@ -68,7 +72,7 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect("/homepage");
+  res.redirect("/users/registration");
 });
 
 ///////////////////////////////////////////////////////////////
