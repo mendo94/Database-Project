@@ -3,12 +3,12 @@ const app = express();
 const mustacheExpress = require("mustache-express");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
+const formidable = require("formidable");
 const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "/views");
+const __basedir = __dirname;
 global.models = require("./models");
-
-
 
 const PORT = 8080;
 app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
@@ -29,10 +29,12 @@ app.use(express.static("static"));
 app.use("/js", express.static("static"));
 app.use("/css", express.static("static"));
 app.use("/img", express.static("static"));
+app.use("/uploads", express.static("static"));
 
 ///////////////////////////////////////////////////////////////
 //              Setup route for client side access
 ///////////////////////////////////////////////////////////////
+
 const clientRoutes = require("./routes/clientInteraction");
 
 app.use("/client", clientRoutes);
@@ -51,17 +53,54 @@ app.use("/users", userRouter);
 //              DASHBOARD
 ///////////////////////////////////////////////////////////////
 
-// app.get("/homepage", async (req, res) => {
-//   const containers = await models.Container.findAll({});
+app.get("/edit-profile", async (req, res) => {
+  const id = req.session.user.userId;
+  const { username, first_name, last_name } = req.session.user;
 
-//   res.render("homepage", { containers: containers });
-// });
+  try {
+    const user = await models.User.findAll({
+      where: {
+        id: id,
+        username: username,
+        first_name: first_name,
+        last_name: last_name,
+      },
+    });
+    // res.json(user);
+    res.render("edit-profile", {
+      id: id,
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
+function uploadFile(req, callback) {
+  new formidable.IncomingForm()
+    .parse(req)
+    .on("fileBegin", (name, file) => {
+      file.path = __basedir + "/uploads/" + file.name;
+    })
+    .on("file", (name, file) => {
+      callback(file.name);
+    });
+}
 
+app.post("/upload", (req, res) => {
+  uploadFile(req, (photoURL) => {
+    res.send("UPLOAD");
+  });
+});
 
 app.get("/homepage", async (req, res) => {
-  // res.json(item);
-  res.render("room-dashboard-display");
+  const { first_name, last_name } = req.session.user;
+  res.render("room-dashboard-display", {
+    first_name: first_name,
+    last_name: last_name,
+  });
 });
 
 app.get("/room-view/:roomId", async (req, res) => {
@@ -84,13 +123,12 @@ app.get("/", (req, res) => {
 ///////////////////////////////////////////////////////////////
 
 // table for household
-app.get('/household-members', (req, res) => {
-  res.render('household-members')
-})
+app.get("/household-members", (req, res) => {
+  res.render("household-members");
+});
 
-app.get('/create-room', (req, res) => {
-  
-})
+app.get("/create-room", (req, res) => {});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
