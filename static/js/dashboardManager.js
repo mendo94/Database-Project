@@ -61,15 +61,15 @@ function createTable () {
               
               </p>
               <a href="#!" class="card-link">Edit Item</a>
-              <a href="/object-handling/delete/item/${item.id}" class="card-link">Delete Item</a>
+              <a href="/object-handling/delete/item/${roomId.innerHTML}/${item.id}" class="card-link">Delete Item</a>
             </div>
           </div>`
         })
         return `<div class="card box-storage" id="container-${container.id}">
         <h1>${container.box}</h1>
-        <a href="/object-handling/delete/box/${container.id}">Delete Box</a>
+        <a href="/object-handling/delete/box/room-view/${container.id}/?roomId=${roomId.innerHTML}">Delete Box</a>
 
-        <a href="/object-handling/create-item/${container.box}/${container.id}">Make new Item for Box</a>
+        <a href="/object-handling/create-item/${roomId.innerHTML}/${container.box}/${container.id}">Make new Item for Box</a>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
             ${itemsElements.join('')}
           Drag Item Here
@@ -89,19 +89,12 @@ function drop(ev) {
         let data = ev.dataTransfer.getData("text");
         let movedElement = document.getElementById(data)
         let containerElement = ev.target.parentElement
+        let containerElementId = containerElement.id.split('-')[1]
 
         let originalContainerId = movedElement.parentElement.parentElement.id.split('-')[1]
-        let originalContainer = currentStorage.find(container => {
-            return container.id == originalContainerId
-        })
-
-        const movedItem = originalContainer.items.find(item => {
-            console.log(item.id)
-            return item.id == data.split('-')[1]
-        })
         console.log(data.split('-')[1])
         
-        fetch(`./client/items/${movedItem.id}/${containerElement.id.split('-')[1]}`, {
+        fetch(`../client/items/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
         .then(message => {

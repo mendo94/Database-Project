@@ -11,7 +11,7 @@
   {{>navigation-menu}}
 
 
-  <form action="/object-handling/create-item/" method="POST">
+  <form action="../object-handling/create-item/{{roomId}}" method="POST">
     <div class="form-group">
       <label for="formGroupExampleInput bg-light">Give a name for your item</label>
       <input type="text" class="form-control" id="formGroupExampleInput" name="item"
@@ -25,7 +25,6 @@
 
   {{^message}}
   {{/message}}
-  {{>footer}}
 </body>
 
 </html>

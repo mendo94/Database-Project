@@ -45,7 +45,7 @@ clientRouter.post('/items/:postItem/:containerId', async (req, res) => {
 })
 
 clientRouter.post('/boxes/:postBox/:roomId', async (req, res) => {
-    const updateItem = await models.Item.update({
+    const updateItem = await models.Container.update({
         roomId: req.params.roomId
     }, {
         where: {
