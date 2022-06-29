@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
+  
 
   {{>header}}
-  <title>Home Page</title>
+  
 </head>
 
 <body>
+  <span id="roomId" style="display: none;">{{roomId}}</span>
+  <title>Viewing {{currentRoom}}</title>
   {{>navigation-menu}}
 
   {{>content}}

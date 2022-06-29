@@ -97,11 +97,22 @@ app.post("/upload", (req, res) => {
 
 app.get("/homepage", async (req, res) => {
   const { first_name, last_name } = req.session.user;
-  res.render("homepage", {
+  res.render("room-dashboard-display", {
+    first_name: first_name,
+    last_name: last_name,
+    username: req.session.user.username
+  });
+});
+
+app.get("/room-view/:roomId", async (req, res) => {
+  const room = await models.Room.findByPk(req.params.roomId);
+  const { first_name, last_name } = req.session.user;
+  console.log(room);
+  res.render(`homepage`, {currentRoom: room.name, roomId: room.id,
     first_name: first_name,
     last_name: last_name,
   });
-});
+})
 
 app.post("/logout", (req, res) => {
   if (req.session) {
