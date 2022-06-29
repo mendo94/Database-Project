@@ -25,6 +25,8 @@ userRouter.post("/registration", async (req, res) => {
         const user = models.User.build({
           username: username,
           password: hash,
+          first_name: first_name,
+          last_name: last_name,
         });
         const savedUser = await user.save();
         if (savedUser != null) {

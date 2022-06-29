@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Container.init(
     {
       box: DataTypes.STRING,
-      roomId: DataTypes.INTEGER
+      roomId: DataTypes.INTEGER,
     },
     {
       sequelize,
