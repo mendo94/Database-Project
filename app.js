@@ -52,23 +52,6 @@ const navigationRoutes = require('./routes/navigationMenu');
 
 app.use('/navigation', authenticateMiddleware, navigationRoutes);
 
-function uploadFile(req, callback) {
-  new formidable.IncomingForm()
-    .parse(req)
-    .on('fileBegin', (name, file) => {
-      file.path = __basedir + '/uploads/' + file.name;
-    })
-    .on('file', (name, file) => {
-      callback(file.name);
-    });
-}
-
-app.post('/upload', (req, res) => {
-  uploadFile(req, (photoURL) => {
-    res.send('UPLOAD');
-  });
-});
-
 app.get('/homepage', async (req, res) => {
   const { first_name, last_name } = req.session.user;
   res.render('room-dashboard-display', {
