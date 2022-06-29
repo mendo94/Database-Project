@@ -40,9 +40,16 @@ clientRouter.post("/create-item/:roomId", async (req, res) => {
     const name = req.body.item;
     const containerId = req.body.containerId;
 
-    const item = models.Item.build({
-        name: name,
-        containerId: containerId
+  const item = models.Item.build({
+    name: name,
+    containerId: containerId,
+  });
+  const persistedItem = await item.save();
+  if (persistedItem != null) {
+    res.redirect("/homepage");
+  } else {
+    res.render("/create-box", {
+      message: "Unable to create item",
     });
     const persistedItem = await item.save();
     if (persistedItem != null) {
@@ -108,4 +115,4 @@ clientRouter.get('/delete/room/:id', async (req, res) => {
     res.redirect(`/homepage`)
 })
 
-module.exports = clientRouter
+module.exports = clientRouter;
