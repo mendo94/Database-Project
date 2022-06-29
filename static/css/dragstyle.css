@@ -13,14 +13,26 @@
 }
 
 .box-drag-position {
-    width: 10rem;
-    height: 10rem;
+    padding: 1rem;
     background-color: green;
     margin: 1rem;
+}
+
+.boxItem {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 #box-position-holder {
     
     display: flex;
     flex-wrap: wrap;
+    
+}
+
+.box-storage {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
