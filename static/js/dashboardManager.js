@@ -87,18 +87,18 @@ function drop(ev) {
         ev.preventDefault();
         ev.target.classList.remove('drag-over')
         let data = ev.dataTransfer.getData("text");
-        let movedElement = document.getElementById(data)
-        let containerElement = ev.target.parentElement
-        let containerElementId = containerElement.id.split('-')[1]
-
-        let originalContainerId = movedElement.parentElement.parentElement.id.split('-')[1]
-        console.log(data.split('-')[1])
+        let containerElementId = ev.target.parentElement.id.split('-')[1]
+        console.log(`Item Id: ${data.split('-')[1]}`)
+        console.log(`New Box Id: ${containerElementId}`)
         
         fetch(`/client/items/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
         .then(message => {
             debug.log('storage change successful!')
+        })
+        .catch(message => {
+            debug.log(`ERROR: ${message}`)
         })
         document.getElementById(data).classList.remove('hide');
         setupDashboard()
