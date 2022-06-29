@@ -66,7 +66,7 @@ userRouter.post("/login", async (req, res) => {
             last_name: user.last_name,
           };
           console.log(user);
-          res.redirect("/homepage");
+          res.redirect("/navigation/homepage");
         }
       } else {
         res.render("login", { message: "Incorrect username or password" });
@@ -79,6 +79,13 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.get("/login", (req, res) => {
   res.render("login");
+});
+
+userRouter.post("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy();
+  }
+  res.redirect("/users/registration");
 });
 
 module.exports = userRouter;
