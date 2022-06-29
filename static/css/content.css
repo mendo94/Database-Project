@@ -11,11 +11,11 @@ main {
   justify-content: space-evenly;
 }
 
-.card {
-  /* width: 24%; */
+/* .card {
+  width: 24%;
   max-width: 200px;
   text-align: center;
-}
+} */
 
 .content-btn {
   /* width: 45%; */
