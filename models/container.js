@@ -10,14 +10,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Container.hasMany(models.Item, {
-        as: "itemName",
+        as: "item",
         foreignKey: "containerId",
+      });
+
+      models.Container.belongsTo(models.Room, {
+        as: "user",
+        foreignKey: "ownerId",
       });
     }
   }
   Container.init(
     {
       box: DataTypes.STRING,
+      roomId: DataTypes.INTEGER,
     },
     {
       sequelize,

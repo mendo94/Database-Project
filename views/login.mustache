@@ -23,12 +23,12 @@
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand mr-4" href="#"><img class="logo-image" src="img/navbar-logo.png" alt=""></a>
+    <a class="navbar-brand mr-4" href="#"><img class="logo-image" src="/img/navbar-logo.png" alt=""></a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
         <li class="nav-item active">
-          <a class="nav-link" href="/landing"><button class="show-modal">Get Started</button><span
+          <a class="nav-link" href="/users/registration"><button class="show-modal">Get Started</button><span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
@@ -136,7 +136,7 @@
       <img src="/img/logo.png" alt="">
     </div>
     <button class="close-login-modal">&times;</button>
-    <form action="/login" method="POST">
+    <form action="/users/login" method="POST">
       <div class="form-outline mb-4">
         <input type="text" name="username" class="form-control form-control-lg" />
         <label class="form-label">Enter Username</label>
@@ -156,7 +156,7 @@
         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
       </div>
 
-      <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/landing"
+      <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/users/registration"
           class="fw-bold text-body"><u>Sign
             up!</u></a></p>
     </form>
