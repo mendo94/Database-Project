@@ -3,7 +3,7 @@ const app = express();
 const mustacheExpress = require("mustache-express");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
-// const formidable = require("formidable");
+const formidable = require("formidable");
 const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "/views");
@@ -34,16 +34,12 @@ app.use("/uploads", express.static("static"));
 ///////////////////////////////////////////////////////////////
 //              Setup route for client side access
 ///////////////////////////////////////////////////////////////
-const userRouter = require("./routes/loginRegistration");
-
-app.use("/users", userRouter);
 
 const clientRoutes = require("./routes/clientInteraction");
 
 app.use("/client", clientRoutes);
 
 const objectRoutes = require("./routes/boxItemHandling");
-const formidable = require("formidable");
 
 app.use("/object-handling", objectRoutes);
 
