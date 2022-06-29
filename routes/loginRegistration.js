@@ -10,8 +10,12 @@ const SALT_ROUNDS = 10;
 ///////////////////////////////////////////////////////////////
 
 userRouter.post("/registration", async (req, res) => {
-  const { username, password, first_name, last_name } = req.body;
-
+  const { username, password, confirmPassword, first_name, last_name } = req.body;
+  if (password != confirmPassword) {
+    res.render('registration', { message: 'Passwords did not match' })
+  } else {
+    res.render('login')
+  }
   const persistedUser = await models.User.findOne({
     where: {
       username: username,
