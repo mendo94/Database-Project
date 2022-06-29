@@ -5,7 +5,7 @@ let roomsAvailable = []
 let boxesAvailable = []
 
 async function getCurrentBoxes() {
-    await fetch("./client/space/boxes")
+    await fetch("../client/space/boxes")
     .then(raw => {
         return raw.json()
     })
@@ -17,7 +17,7 @@ async function getCurrentBoxes() {
 }
 
 async function getCurrentStorage() {
-    await fetch("./client/space/rooms")
+    await fetch("../client/space/rooms")
     .then(raw => {
         return raw.json()
     })
