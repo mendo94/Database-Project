@@ -23,5 +23,8 @@
     "pg": "^8.7.3",
     "sequelize": "^6.21.1",
     "socket.io": "^4.5.1"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }
