@@ -80,8 +80,8 @@ function drop(ev) {
         ev.target.classList.remove('drag-over')
         let data = ev.dataTransfer.getData("text");
         let containerElementId = ev.target.parentElement.id.split('-')[1]
-        console.log(data.split('-')[1])
-        console.log(containerElementId)
+        console.log(`Box Id: ${data.split('-')[1]}`)
+        console.log(`New Room Id: ${containerElementId}`)
         
         fetch(`../client/boxes/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
