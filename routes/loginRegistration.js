@@ -10,10 +10,7 @@ const SALT_ROUNDS = 10;
 ///////////////////////////////////////////////////////////////
 
 userRouter.post("/registration", async (req, res) => {
-  // const { first_name, last_name } = req.body;
-  const username = req.body.username;
-  const password = req.body.password;
-  console.log(username);
+  const { username, password, first_name, last_name } = req.body;
 
   const persistedUser = await models.User.findOne({
     where: {
@@ -49,22 +46,24 @@ userRouter.get("/registration", (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  // const { username, password } = req.body;
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body;
 
-  console.log(username);
   const user = await models.User.findOne({
     where: {
       username: username,
     },
   });
-  console.log(user);
   if (user != null) {
     bcrypt.compare(password, user.password, (error, result) => {
       if (result) {
         if (req.session) {
-          req.session.user = { userId: user.id };
+          req.session.user = {
+            userId: user.id,
+            username: user.username,
+            first_name: user.first_name,
+            last_name: user.last_name,
+          };
+          console.log(user);
           res.redirect("/homepage");
         }
       } else {
@@ -72,7 +71,7 @@ userRouter.post("/login", async (req, res) => {
       }
     });
   } else {
-    res.redirect("users/login", { message: "Incorrect username or password" });
+    res.redirect("/users/login", { message: "Incorrect username or password" });
   }
 });
 
