@@ -7,7 +7,7 @@ let storagesAvailable = []
 let itemsAvailable = []
 
 async function getCurrentItems() {
-    await fetch("../client/space/items")
+    await fetch("/client/space/items")
     .then(raw => {
         return raw.json()
     })
@@ -20,7 +20,7 @@ async function getCurrentItems() {
 }
 
 async function getCurrentStorage() {
-    await fetch(`../client/space/boxes/sort/${roomId.innerHTML}`)
+    await fetch(`/client/space/boxes/sort/${roomId.innerHTML}`)
     .then(raw => {
         return raw.json()
     })
@@ -94,7 +94,7 @@ function drop(ev) {
         let originalContainerId = movedElement.parentElement.parentElement.id.split('-')[1]
         console.log(data.split('-')[1])
         
-        fetch(`../client/items/${data.split('-')[1]}/${containerElementId}`, {
+        fetch(`/client/items/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
         .then(message => {

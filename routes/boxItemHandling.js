@@ -34,9 +34,9 @@ clientRouter.post('/create-box/:page', async (req, res) => {
   const persistedContainer = await container.save();
   if (persistedContainer != null) {
     if (req.params.page == 'room') {
-      res.redirect('/homepage');
+      res.redirect('/navigation/homepage');
     } else {
-      res.redirect(`/room-view/${req.body.roomId}`);
+      res.redirect(`/navigation/room-view/${req.body.roomId}`);
     }
   } else {
     res.render(`object-creation/create-box/${req.params.page}`, {
@@ -56,14 +56,14 @@ clientRouter.post('/create-item/:roomId', async (req, res) => {
   });
   const persistedItem = await item.save();
   if (persistedItem != null) {
-    res.redirect('/homepage');
+    res.redirect('/navigation/homepage');
   } else {
     res.render('/create-box', {
       message: 'Unable to create item',
     });
     const persistedItem = await item.save();
     if (persistedItem != null) {
-      res.redirect(`/room-view/${req.params.roomId}`);
+      res.redirect(`/navigation/room-view/${req.params.roomId}`);
     } else {
       res.render('object-creation/create-item', {
         message: 'Unable to create item',
@@ -81,7 +81,7 @@ clientRouter.post('/create-room', async (req, res) => {
   });
   const persistedContainer = await container.save();
   if (persistedContainer != null) {
-    res.redirect('/homepage');
+    res.redirect('/navigation/homepage');
   } else {
     res.render('object-creation/create-room', {
       message: 'Unable to create room',
@@ -101,9 +101,9 @@ clientRouter.get('/delete/box/:page/:id', async (req, res) => {
     },
   });
   if (req.params.page == 'room') {
-    res.redirect('/homepage');
+    res.redirect('/navigation/homepage');
   } else {
-    res.redirect(`/room-view/${req.query.roomId}`);
+    res.redirect(`/navigation/room-view/${req.query.roomId}`);
   }
 });
 
@@ -113,7 +113,7 @@ clientRouter.get('/delete/item/:roomId/:id', async (req, res) => {
       id: req.params.id,
     },
   });
-  res.redirect(`/room-view/${req.params.roomId}`);
+  res.redirect(`/navigation/room-view/${req.params.roomId}`);
 });
 
 clientRouter.get('/delete/room/:id', async (req, res) => {
@@ -122,7 +122,7 @@ clientRouter.get('/delete/room/:id', async (req, res) => {
       id: req.params.id,
     },
   });
-  res.redirect(`/homepage`);
+  res.redirect(`/navigation/homepage`);
 });
 
 module.exports = clientRouter;

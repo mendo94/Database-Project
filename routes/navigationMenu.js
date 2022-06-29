@@ -47,16 +47,29 @@ navigationRoutes.post("/upload", (req, res) => {
   });
 });
 
-navigationRoutes.get("/homepage", async (req, res) => {
+navigationRoutes.get('/homepage', async (req, res) => {
   const { first_name, last_name } = req.session.user;
   try {
-    res.render("homepage", {
+    res.render("room-dashboard-display", {
       first_name: first_name,
       last_name: last_name,
+      username: req.session.user.username,
     });
   } catch (error) {
     console.log(error);
   }
+});
+
+navigationRoutes.get('/room-view/:roomId', async (req, res) => {
+  const room = await models.Room.findByPk(req.params.roomId);
+  const { first_name, last_name } = req.session.user;
+  console.log(room);
+  res.render(`homepage`, {
+    currentRoom: room.name,
+    roomId: room.id,
+    first_name: first_name,
+    last_name: last_name,
+  });
 });
 
 module.exports = navigationRoutes;

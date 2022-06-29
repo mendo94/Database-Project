@@ -60,7 +60,7 @@ function createTable () {
         })
         return `<div class="card box-storage" id="container-${container.id}">
         <h1>${container.name}</h1>
-        <a href="/room-view/${container.id}">Modify Room</a>
+        <a href="/navigation/room-view/${container.id}">Modify Room</a>
         <a href="/object-handling/delete/room/${container.id}">Delete Room</a>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
             ${boxElements.join('')}
