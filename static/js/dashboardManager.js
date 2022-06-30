@@ -7,7 +7,7 @@ let storagesAvailable = []
 let itemsAvailable = []
 
 async function getCurrentItems() {
-    await fetch("../client/space/items")
+    await fetch("/client/space/items")
     .then(raw => {
         return raw.json()
     })
@@ -20,7 +20,7 @@ async function getCurrentItems() {
 }
 
 async function getCurrentStorage() {
-    await fetch(`../client/space/boxes/sort/${roomId.innerHTML}`)
+    await fetch(`/client/space/boxes/sort/${roomId.innerHTML}`)
     .then(raw => {
         return raw.json()
     })
@@ -87,18 +87,18 @@ function drop(ev) {
         ev.preventDefault();
         ev.target.classList.remove('drag-over')
         let data = ev.dataTransfer.getData("text");
-        let movedElement = document.getElementById(data)
-        let containerElement = ev.target.parentElement
-        let containerElementId = containerElement.id.split('-')[1]
-
-        let originalContainerId = movedElement.parentElement.parentElement.id.split('-')[1]
-        console.log(data.split('-')[1])
+        let containerElementId = ev.target.parentElement.id.split('-')[1]
+        console.log(`Item Id: ${data.split('-')[1]}`)
+        console.log(`New Box Id: ${containerElementId}`)
         
-        fetch(`../client/items/${data.split('-')[1]}/${containerElementId}`, {
+        fetch(`/client/items/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
         .then(message => {
             debug.log('storage change successful!')
+        })
+        .catch(message => {
+            debug.log(`ERROR: ${message}`)
         })
         document.getElementById(data).classList.remove('hide');
         setupDashboard()

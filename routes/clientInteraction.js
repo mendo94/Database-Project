@@ -1,8 +1,12 @@
 const express = require('express');
 const clientRouter = express.Router();
 
-clientRouter.get('/space/rooms', async (req, res) => {
-  const container = await models.Room.findAll({});
+clientRouter.get('/space/rooms/', async (req, res) => {
+  const container = await models.Room.findAll({
+    where: {
+      ownerId: req.session.user.userId
+    }
+  });
   res.json(container);
 });
 

@@ -53,26 +53,6 @@ const navigationRoutes = require('./routes/navigationMenu');
 
 app.use('/navigation', authenticateMiddleware, navigationRoutes);
 
-app.get('/homepage', async (req, res) => {
-  const { first_name, last_name } = req.session.user;
-  res.render('room-dashboard-display', {
-    first_name: first_name,
-    last_name: last_name,
-    username: req.session.user.username,
-  });
-});
-
-app.get('/room-view/:roomId', async (req, res) => {
-  const room = await models.Room.findByPk(req.params.roomId);
-  const { first_name, last_name } = req.session.user;
-  console.log(room);
-  res.render(`homepage`, {
-    currentRoom: room.name,
-    roomId: room.id,
-    first_name: first_name,
-    last_name: last_name,
-  });
-});
 
 app.get('/', (req, res) => {
   res.redirect('/users/registration');
