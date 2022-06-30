@@ -36,17 +36,60 @@ clientRouter.get('/space/items', async (req, res) => {
   res.json(item);
 });
 
-clientRouter.post('/items/:postItem/:containerId', async (req, res) => {
+clientRouter.post('/update-item/:room', async (req, res) => {
   const updateItem = await models.Item.update(
     {
-      containerId: req.params.containerId,
+      name: req.body.name,
     },
     {
       where: {
-        id: req.params.postItem,
+        id: req.body.id,
       },
     }
   );
+  res.redirect(`/navigation/room-view/${req.params.room}`)
+});
+
+clientRouter.post('/update-box/:room', async (req, res) => {
+  const updateItem = await models.Container.update(
+    {
+      box: req.body.name,
+    },
+    {
+      where: {
+        id: req.body.id,
+      },
+    }
+  );
+  res.redirect(`/navigation/room-view/${req.params.room}`)
+});
+
+clientRouter.post('/update-box', async (req, res) => {
+  const updateItem = await models.Container.update(
+    {
+      box: req.body.name,
+    },
+    {
+      where: {
+        id: req.body.id,
+      },
+    }
+  );
+  res.redirect(`/navigation/homepage`)
+});
+
+clientRouter.post('/update-room', async (req, res) => {
+  const updateItem = await models.Room.update(
+    {
+      name: req.body.name,
+    },
+    {
+      where: {
+        id: req.body.id,
+      },
+    }
+  );
+  res.redirect(`/navigation/homepage`)
 });
 
 clientRouter.post('/items/:postItem/:containerId', async (req, res) => {
