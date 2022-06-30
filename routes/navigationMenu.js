@@ -45,11 +45,9 @@ navigationRoutes.post('/upload', async (req, res) => {
   sampleFile = req.files.sampleFile;
 
   uploadPath = path.join(__dirname, '..', 'static', 'uploads', sampleFile.name);
-  console.log(uploadPath);
 
   sampleFile.mv(uploadPath, async (err) => {
     if (err) {
-      console.log(uploadPath);
       return res.status(500).send(err);
     }
     photoURL = path.join('..', 'uploads', sampleFile.name);
@@ -76,7 +74,6 @@ navigationRoutes.post('/upload', async (req, res) => {
 });
 
 navigationRoutes.post('/save-edits', async (req, res) => {
-  console.log(`Edit body: ${req.body.first_name}`);
   req.session.user.username = req.body.username;
   req.session.user.first_name = req.body.first_name;
   req.session.user.last_name = req.body.last_name;
@@ -109,7 +106,6 @@ navigationRoutes.get('/homepage', async (req, res) => {
 
 navigationRoutes.get('/room-view/:roomId', async (req, res) => {
   const room = await models.Room.findByPk(req.params.roomId);
-  console.log(room);
   res.render(`homepage`, {
     currentRoom: room.name,
     roomId: room.id,

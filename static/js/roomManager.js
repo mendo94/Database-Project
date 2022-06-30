@@ -42,7 +42,6 @@ async function setupDashboard() {
             return item.roomId == storageRooms[index].id
         })
     }
-    console.log(storageRooms)
     currentRooms = storageRooms
     createTable()
 
@@ -59,7 +58,6 @@ function updateObjectStart(objectId, objectType) {
     cardTitle.style.display = 'none';
     cardButton.style.display = 'none';
     card.setAttribute('draggable', 'false');
-    console.log(card)
 }
 
 function createTable() {
@@ -106,7 +104,6 @@ function createTable() {
         
       </div>`
     })
-    console.log(roomElements)
 
     boxOrganizer.innerHTML = roomElements.join('')
 }
@@ -117,14 +114,12 @@ function drop(ev) {
         ev.target.classList.remove('drag-over')
         let data = ev.dataTransfer.getData("text");
         let containerElementId = ev.target.parentElement.id.split('-')[1]
-        console.log(`Box Id: ${data.split('-')[1]}`)
-        console.log(`New Room Id: ${containerElementId}`)
 
         fetch(`../client/boxes/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
             .then(message => {
-                debug.log('storage change successful!')
+                console.log('storage change successful!')
             })
         document.getElementById(data).classList.remove('hide');
         setupDashboard()

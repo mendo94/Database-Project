@@ -12,7 +12,6 @@ async function getCurrentItems() {
         return raw.json()
     })
     .then(info => {
-        console.log(currentStorage)
         itemsAvailable = info
     })
     .catch (error => {return error})
@@ -28,7 +27,6 @@ async function getCurrentStorage() {
         currentStorage = info
         
         storagesAvailable = info
-        console.log(storagesAvailable)
     })
     .catch (error => {return error})
 }
@@ -45,7 +43,6 @@ async function setupDashboard () {
             return item.containerId == storageContainers[index].id
         })
     }
-    console.log(storageContainers)
     currentStorage = storageContainers
     createTable()
 
@@ -62,7 +59,6 @@ function updateObjectStart(objectId, objectType) {
     cardTitle.style.display = 'none';
     cardButton.style.display = 'none';
     card.setAttribute('draggable', 'false');
-    console.log(card)
 }
 
 function createTable () {
@@ -112,7 +108,6 @@ function createTable () {
         
       </div>`
     })
-    console.log(containerElements)
 
     boxOrganizer.innerHTML = containerElements.join('')
 }
@@ -123,17 +118,15 @@ function drop(ev) {
         ev.target.classList.remove('drag-over')
         let data = ev.dataTransfer.getData("text");
         let containerElementId = ev.target.parentElement.id.split('-')[1]
-        console.log(`Item Id: ${data.split('-')[1]}`)
-        console.log(`New Box Id: ${containerElementId}`)
         
         fetch(`/client/items/${data.split('-')[1]}/${containerElementId}`, {
             method: 'POST'
         })
         .then(message => {
-            debug.log('storage change successful!')
+            console.log('storage change successful!')
         })
         .catch(message => {
-            debug.log(`ERROR: ${message}`)
+            console.log(`ERROR: ${message}`)
         })
         document.getElementById(data).classList.remove('hide');
         setupDashboard()
