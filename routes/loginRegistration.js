@@ -26,7 +26,7 @@ userRouter.post('/registration', async (req, res) => {
           password: hash,
           first_name: first_name,
           last_name: last_name,
-          profilePicture: profilePicture,
+          profilePicture: null,
         });
         const savedUser = await user.save();
         if (savedUser != null) {

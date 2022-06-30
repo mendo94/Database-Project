@@ -1,7 +1,8 @@
 <!-- Vertical navbar -->
 <div class="vertical-nav" id="sidebar">
   <div class="py-4 px-3 mb-4">
-    <div class="media d-flex align-items-center"><img src="/img/default.png" alt="..." width="65"
+    {{#profilePicture}}
+    <div class="media d-flex align-items-center"><img src="{{profilePicture}}" alt="" width="65"
         class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
         <span>
@@ -11,6 +12,19 @@
 
       </div>
     </div>
+    {{/profilePicture}}
+    {{^profilePicture}}
+    <div class="media d-flex align-items-center"><img src="/img/default.png" alt="" width="65"
+        class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <span>
+          <h4 class="text-white m-0">{{first_name}} {{last_name}}</h4>
+        </span>
+
+
+      </div>
+    </div>
+    {{/profilePicture}}
   </div>
 
 
@@ -42,7 +56,7 @@
     </li>
     </li>
     <li class="nav-item anchor-link">
-      <a href="/navigation/edit-profile/{{id}}" class="nav-link text-white font-italic">
+      <a href="/navigation/edit-profile" class="nav-link text-white font-italic">
         <i class="fa-solid fa-id-badge"></i>
         Edit Profile
       </a>

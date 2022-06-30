@@ -6,6 +6,11 @@ clientRouter.get('/create-box/:page/:roomId', async (req, res) => {
   res.render('object-creation/create-box', {
     roomId: req.params.roomId,
     page: req.params.page,
+    profilePicture: req.session.user.profilePicture,
+    id: req.session.user.userId,
+    username: req.session.user.username,
+    first_name: req.session.user.first_name,
+    last_name: req.session.user.last_name,
   });
 });
 
@@ -16,12 +21,24 @@ clientRouter.get(
       containerId: req.params.containerId,
       containerName: req.params.containerName,
       roomId: req.params.roomId,
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
     });
   }
 );
 
 clientRouter.get('/create-room', async (req, res) => {
-  res.render('object-creation/create-room');
+  res.render('object-creation/create-room', {
+    
+    profilePicture: req.session.user.profilePicture,
+    id: req.session.user.userId,
+    username: req.session.user.username,
+    first_name: req.session.user.first_name,
+    last_name: req.session.user.last_name,
+  });
 });
 
 clientRouter.post('/create-box/:page', async (req, res) => {
@@ -42,6 +59,11 @@ clientRouter.post('/create-box/:page', async (req, res) => {
     res.render(`object-creation/create-box/${req.params.page}`, {
       message: 'Unable to create container',
       roomId: req.body.roomId,
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
     });
   }
 });
@@ -61,6 +83,11 @@ clientRouter.post('/create-item/:roomId', async (req, res) => {
     } else {
       res.render('object-creation/create-item', {
         message: 'Unable to create item',
+        profilePicture: req.session.user.profilePicture,
+        id: req.session.user.userId,
+        username: req.session.user.username,
+        first_name: req.session.user.first_name,
+        last_name: req.session.user.last_name,
       });
     }
 
@@ -79,6 +106,11 @@ clientRouter.post('/create-room', async (req, res) => {
   } else {
     res.render('object-creation/create-room', {
       message: 'Unable to create room',
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
     });
   }
 });

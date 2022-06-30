@@ -7,62 +7,30 @@ const navigationRoutes = express.Router();
 //              DASHBOARD
 ///////////////////////////////////////////////////////////////
 
-// navigationRoutes.get('/edit-profile', async (req, res) => {
-//   const id = req.session.user.userId;
-//   const { username, first_name, last_name, profilePicture } = req.session.user;
-
-//   try {
-//     const user = await models.User.findAll({
-//       where: {
-//         id: id,
-//         username: username,
-//         first_name: first_name,
-//         last_name: last_name,
-//         profilePicture: profilePicture,
-//       },
-//     });
-//     // res.json(user);
-//     res.render('edit-profile', {
-//       id: id,
-//       username: username,
-//       first_name: first_name,
-//       last_name: last_name,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-// navigationRoutes.get('/edit-profile/:id', async (req, res) => {
-//   const id = req.params.session.userId;
-//   console.log(id);
-
-//   const user = await models.User.findByPk(id);
-//   res.json(user);
-//   // res.render('edit-profile', user.dataValues);
-// });
-
-navigationRoutes.post('/edit-profile', async (req, res) => {
+navigationRoutes.get('/edit-profile', async (req, res) => {
   const id = req.session.user.userId;
-  const profilePicture = req.body.profilePicture;
+  const { username, first_name, last_name, profilePicture } = req.session.user;
+
   try {
-    const user = models.Users.build({
-      id: id,
-      profilePicture: photoURL,
+    const user = await models.User.findAll({
+      where: {
+        id: id
+      },
     });
-    const persistedUser = await user.save();
-    console.log(persistedUser);
-    if (persistedUser != null) {
-      res.redirect('/navigation/homepage');
-    } else {
-      res.send('nothing happened');
-    }
+    // res.json(user);
+    res.render('edit-profile', {
+      profilePicture: req.session.user.profilePicture,
+      id: id,
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+    });
   } catch (error) {
     console.log(error);
   }
 });
 
-navigationRoutes.post('/upload', function (req, res) {
+navigationRoutes.post('/upload', async (req, res) => {
   const id = req.session.user.userId;
   const { username, first_name, last_name, profilePicture } = req.session.user;
   let sampleFile;
@@ -79,13 +47,24 @@ navigationRoutes.post('/upload', function (req, res) {
   uploadPath = path.join(__dirname, '..', 'static', 'uploads', sampleFile.name);
   console.log(uploadPath);
 
-  sampleFile.mv(uploadPath, function (err) {
+  sampleFile.mv(uploadPath, async (err) => {
     if (err) {
       console.log(uploadPath);
       return res.status(500).send(err);
     }
     photoURL = path.join('..', 'uploads', sampleFile.name);
     console.log(`${photoURL}`);
+    const updateItem = await models.User.update(
+      {
+        profilePicture: photoURL,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    req.session.user.profilePicture = photoURL;
     res.render('edit-profile', {
       profilePicture: photoURL,
       id: id,
@@ -96,13 +75,32 @@ navigationRoutes.post('/upload', function (req, res) {
   });
 });
 
+navigationRoutes.post('/save-edits', async (req, res) => {
+  console.log(`Edit body: ${req.body.first_name}`);
+  req.session.user.username = req.body.username;
+  req.session.user.first_name = req.body.first_name;
+  req.session.user.last_name = req.body.last_name;
+  const editedProfile = await models.User.update({
+      username: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name
+    },
+    {
+      where: {
+        id: req.session.user.userId
+      }
+    });
+  res.redirect('/navigation/edit-profile')
+})
+
 navigationRoutes.get('/homepage', async (req, res) => {
-  const { first_name, last_name } = req.session.user;
   try {
     res.render('room-dashboard-display', {
-      first_name: first_name,
-      last_name: last_name,
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
       username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
     });
   } catch (error) {
     console.log(error);
@@ -111,13 +109,15 @@ navigationRoutes.get('/homepage', async (req, res) => {
 
 navigationRoutes.get('/room-view/:roomId', async (req, res) => {
   const room = await models.Room.findByPk(req.params.roomId);
-  const { first_name, last_name } = req.session.user;
   console.log(room);
   res.render(`homepage`, {
     currentRoom: room.name,
     roomId: room.id,
-    first_name: first_name,
-    last_name: last_name,
+    profilePicture: req.session.user.profilePicture,
+    id: req.session.user.userId,
+    username: req.session.user.username,
+    first_name: req.session.user.first_name,
+    last_name: req.session.user.last_name,
   });
 });
 
