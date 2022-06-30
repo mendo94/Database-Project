@@ -79,7 +79,7 @@ userRouter.post('/login', async (req, res) => {
 });
 
 userRouter.get('/login', (req, res) => {
-  res.render('registration');
+  res.render('registration', {loginPage: true,});
 });
 
 userRouter.get('/logout', (req, res, next) => {
