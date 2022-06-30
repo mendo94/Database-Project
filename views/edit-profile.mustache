@@ -24,8 +24,8 @@
                       <div class="mx-auto" style="width: 140px;">
                         <div class="d-flex justify-content-center align-items-center rounded"
                           style="height: 140px; background-color: rgb(233, 236, 239);">
-                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"><img class="profile-pic"
-                              src="{{photoURL}}" alt=""></span>
+                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                            <img class="profile-pic" src="{{profilePicture}}" alt=""></span>
 
                         </div>
                       </div>
@@ -39,7 +39,7 @@
                           <form ref='uploadForm' id='uploadForm' action='/navigation/upload' method='POST'
                             encType="multipart/form-data">
                             <input type="file" name="sampleFile" />
-                            <input type='submit' value='Upload!' />
+                            <input type='submit' value='Upload' />
                           </form>
 
 
@@ -152,16 +152,21 @@
                         </div>
                         <div class="row">
                           <div class="col d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit">Save Changes</button>
-                          </div>
-                        </div>
+                            <a href="/navigation/edit-profile">
+
+                              <button class="btn btn-primary">Save Changes</button>
+                            </a>
                       </form>
+
                     </div>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
 
 
