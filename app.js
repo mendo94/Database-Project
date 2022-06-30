@@ -4,7 +4,7 @@ const mustacheExpress = require('mustache-express');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const fileUpload = require('express-fileupload');
-const path = require('path');
+global.path = require('path');
 
 global.models = require('./models');
 
@@ -22,7 +22,9 @@ app.use(
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'));
 app.use(express.urlencoded());
 
-app.use(fileUpload());
+app.use(fileUpload({
+  createParentPath: true,
+}));
 app.set('views', VIEWS_PATH);
 app.set('view engine', 'mustache');
 

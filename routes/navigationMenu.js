@@ -1,4 +1,5 @@
 const express = require('express');
+const { patch } = require('./clientInteraction');
 const navigationRoutes = express.Router();
 // const fileUpload = require('express-fileupload');
 
@@ -45,14 +46,16 @@ navigationRoutes.post('/upload', function (req, res) {
 
   sampleFile = req.files.sampleFile;
 
-  uploadPath = __dirname + '/uploads/' + sampleFile.name;
+  uploadPath = path.join(__dirname, '..', 'static', 'uploads', sampleFile.name) ;
+  console.log(uploadPath)
 
   sampleFile.mv(uploadPath, function (err) {
     if (err) {
+      console.log(uploadPath)
       return res.status(500).send(err);
     }
-    photoURL = `/uploads/${sampleFile.name}`;
-    console.log(`/routes/uploads/${sampleFile.name}`);
+    photoURL = path.join('..', 'uploads', sampleFile.name);
+    console.log(`${photoURL}`);
     res.render('edit-profile', {
       photoURL: photoURL,
       id: id,
