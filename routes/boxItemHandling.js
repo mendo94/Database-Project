@@ -1,69 +1,154 @@
-const express = require('express')
-const clientRouter = express.Router()
+const express = require('express');
+const session = require('express-session');
+const clientRouter = express.Router();
 
-clientRouter.get("/create-box", async (req, res) => {
-    res.render("create-box");
+clientRouter.get('/create-box/:page/:roomId', async (req, res) => {
+  res.render('object-creation/create-box', {
+    roomId: req.params.roomId,
+    page: req.params.page,
+    profilePicture: req.session.user.profilePicture,
+    id: req.session.user.userId,
+    username: req.session.user.username,
+    first_name: req.session.user.first_name,
+    last_name: req.session.user.last_name,
+  });
 });
 
-clientRouter.get("/create-item/:containerName/:containerId", async (req, res) => {
-    res.render("create-item", {containerId: req.params.containerId, containerName: req.params.containerName});
-});
-
-clientRouter.post("/create-box", async (req, res) => {
-    const box = req.body.box;
-
-    const container = models.Container.build({
-        box: box,
+clientRouter.get(
+  '/create-item/:roomId/:containerName/:containerId',
+  async (req, res) => {
+    res.render('object-creation/create-item', {
+      containerId: req.params.containerId,
+      containerName: req.params.containerName,
+      roomId: req.params.roomId,
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
     });
-    const persistedContainer = await container.save();
-    if (persistedContainer != null) {
-        res.redirect("/homepage");
+  }
+);
+
+clientRouter.get('/create-room', async (req, res) => {
+  res.render('object-creation/create-room', {
+    
+    profilePicture: req.session.user.profilePicture,
+    id: req.session.user.userId,
+    username: req.session.user.username,
+    first_name: req.session.user.first_name,
+    last_name: req.session.user.last_name,
+  });
+});
+
+clientRouter.post('/create-box/:page', async (req, res) => {
+  const box = req.body.box;
+
+  const container = models.Container.build({
+    box: box,
+    roomId: req.body.roomId,
+  });
+  const persistedContainer = await container.save();
+  if (persistedContainer != null) {
+    if (req.params.page == 'room') {
+      res.redirect('/navigation/homepage');
     } else {
-        res.render("/create-box", {
-            message: "Unable to create container",
-        });
+      res.redirect(`/navigation/room-view/${req.body.roomId}`);
     }
+  } else {
+    res.render(`object-creation/create-box/${req.params.page}`, {
+      message: 'Unable to create container',
+      roomId: req.body.roomId,
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
+    });
+  }
 });
 
-clientRouter.post("/create-item", async (req, res) => {
-    const name = req.body.item;
-    const containerId = req.body.containerId;
+clientRouter.post('/create-item/:roomId', async (req, res) => {
+  const name = req.body.item;
+  const containerId = req.body.containerId;
 
-    const item = models.Item.build({
-        name: name,
-        containerId: containerId
-    });
+  const item = models.Item.build({
+    name: name,
+    containerId: containerId,
+  });
+
     const persistedItem = await item.save();
     if (persistedItem != null) {
-        res.redirect("/homepage");
+      res.redirect(`/navigation/room-view/${req.params.roomId}`);
     } else {
-        res.render("/create-box", {
-            message: "Unable to create item",
-        });
+      res.render('object-creation/create-item', {
+        message: 'Unable to create item',
+        profilePicture: req.session.user.profilePicture,
+        id: req.session.user.userId,
+        username: req.session.user.username,
+        first_name: req.session.user.first_name,
+        last_name: req.session.user.last_name,
+      });
     }
+
 });
 
-clientRouter.get('/delete/box/:id', async (req, res) => {
-    await models.Item.destroy({
-        where: {
-            containerId: req.params.id
-        }
-    })
-    await models.Container.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    res.redirect('/')
-})
+clientRouter.post('/create-room', async (req, res) => {
+  const name = req.body.room;
 
-clientRouter.get('/delete/item/:id', async (req, res) => {
-    await models.Item.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    res.redirect('/')
-})
+  const container = models.Room.build({
+    name: name,
+    ownerId: req.session.user.userId,
+  });
+  const persistedContainer = await container.save();
+  if (persistedContainer != null) {
+    res.redirect('/navigation/homepage');
+  } else {
+    res.render('object-creation/create-room', {
+      message: 'Unable to create room',
+      profilePicture: req.session.user.profilePicture,
+      id: req.session.user.userId,
+      username: req.session.user.username,
+      first_name: req.session.user.first_name,
+      last_name: req.session.user.last_name,
+    });
+  }
+});
 
-module.exports = clientRouter
+clientRouter.get('/delete/box/:page/:id', async (req, res) => {
+  await models.Item.destroy({
+    where: {
+      containerId: req.params.id,
+    },
+  });
+  await models.Container.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (req.params.page == 'room') {
+    res.redirect('/navigation/homepage');
+  } else {
+    res.redirect(`/navigation/room-view/${req.query.roomId}`);
+  }
+});
+
+clientRouter.get('/delete/item/:roomId/:id', async (req, res) => {
+  await models.Item.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.redirect(`/navigation/room-view/${req.params.roomId}`);
+});
+
+clientRouter.get('/delete/room/:id', async (req, res) => {
+  await models.Room.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.redirect(`/navigation/homepage`);
+});
+
+module.exports = clientRouter;

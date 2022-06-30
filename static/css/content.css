@@ -34,3 +34,8 @@ main {
   text-align: center;
   opacity: 0.5px;
 }
+
+.profile-pic {
+  width: 140px;
+  height: auto;
+}

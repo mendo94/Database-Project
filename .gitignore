@@ -1,4 +1,5 @@
 config
 node_modules
+uploads
 .DS_STORE
 //

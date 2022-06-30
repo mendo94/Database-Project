@@ -24,7 +24,9 @@
                       <div class="mx-auto" style="width: 140px;">
                         <div class="d-flex justify-content-center align-items-center rounded"
                           style="height: 140px; background-color: rgb(233, 236, 239);">
-                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                            <img class="profile-pic" src="{{profilePicture}}" alt=""></span>
+
                         </div>
                       </div>
                     </div>
@@ -34,7 +36,13 @@
                         <p class="mb-0">@{{username}}</p>
                         <div class="text-muted"><small></small></div>
                         <div class="mt-2">
-                          <input type="file" name="photo">
+                          <form ref='uploadForm' id='uploadForm' action='/navigation/upload' method='POST'
+                            encType="multipart/form-data">
+                            <input type="file" name="sampleFile" />
+                            <input type='submit' value='Upload' />
+                          </form>
+
+
 
                         </div>
                       </div>
@@ -49,22 +57,26 @@
                   </ul>
                   <div class="tab-content pt-3">
                     <div class="tab-pane active">
-                      <form class="form" novalidate="">
+                      <form action="/navigation/save-edits" method="POST" class="form" novalidate="">
                         <div class="row">
                           <div class="col">
                             <div class="row">
                               <div class="col">
                                 <div class="form-group">
-                                  <label>Full Name</label>
-                                  <input class="form-control" type="text" name="name"
-                                    placeholder="{{first_name}} {{last_name}}" value="">
+                                  <label>First Name</label>
+                                  <input class="form-control" type="text" name="first_name"
+                                    value="{{first_name}}">
+                                </div>
+                                <div class="form-group">
+                                  <label>Last Name</label>
+                                  <input class="form-control" type="text" name="last_name"
+                                    value="{{last_name}}">
                                 </div>
                               </div>
                               <div class="col">
                                 <div class="form-group">
                                   <label>Username</label>
-                                  <input class="form-control" type="text" name="username" placeholder="{{username}}"
-                                    value="">
+                                  <input class="form-control" type="text" name="username" value="{{username}}">
                                 </div>
                               </div>
                             </div>
@@ -73,7 +85,7 @@
                                 <div class="form-group">
                                   <label>Email</label>
                                   <input class="form-control" type="text"
-                                    placeholder="no email found, would you like to provide one?">
+                                    placeholder="no email found, would you like to provide one?" value="">
                                 </div>
                               </div>
                             </div>
@@ -144,16 +156,19 @@
                         </div>
                         <div class="row">
                           <div class="col d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit">Save Changes</button>
-                          </div>
-                        </div>
+
+                              <button class="btn btn-primary">Save Changes</button>
                       </form>
+
                     </div>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
 
 

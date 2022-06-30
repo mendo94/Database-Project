@@ -1,125 +1,81 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mustacheExpress = require("mustache-express");
-const session = require("express-session");
-const bcrypt = require("bcryptjs");
-const formidable = require("formidable");
-const path = require("path");
+const mustacheExpress = require('mustache-express');
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
+const fileUpload = require('express-fileupload');
+global.path = require('path');
 
-const VIEWS_PATH = path.join(__dirname, "/views");
-const __basedir = __dirname;
-global.models = require("./models");
+global.models = require('./models');
 
 const PORT = 8080;
-app.engine("mustache", mustacheExpress(VIEWS_PATH + "/partials", ".mustache"));
+const VIEWS_PATH = path.join(__dirname, '/views');
 
 app.use(
   session({
-    secret: "somesecret",
+    secret: 'somesecret',
     resave: true,
     saveUninitialized: false,
   })
 );
+
+app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'));
 app.use(express.urlencoded());
 
-app.set("views", VIEWS_PATH);
-app.set("view engine", "mustache");
+app.use(fileUpload({
+  createParentPath: true,
+}));
+app.set('views', VIEWS_PATH);
+app.set('view engine', 'mustache');
 
-app.use(express.static("static"));
-app.use("/js", express.static("static"));
-app.use("/css", express.static("static"));
-app.use("/img", express.static("static"));
-app.use("/uploads", express.static("static"));
+app.use('/uploads', express.static(path.join(__dirname, '/routes/uploads')));
+app.use(express.static('static'));
+app.use('/js', express.static('static'));
+app.use('/css', express.static('static'));
+app.use('/img', express.static('static'));
 
 ///////////////////////////////////////////////////////////////
 //              Setup route for client side access
 ///////////////////////////////////////////////////////////////
 
-const clientRoutes = require("./routes/clientInteraction");
+const authenticateMiddleware = require('./middleware/authenticate');
+const clientRoutes = require('./routes/clientInteraction');
 
-app.use("/client", clientRoutes);
+app.use('/client', authenticateMiddleware, clientRoutes);
 
-const objectRoutes = require("./routes/boxItemHandling");
+const objectRoutes = require('./routes/boxItemHandling');
 
-app.use("/object-handling", objectRoutes);
+app.use('/object-handling', authenticateMiddleware, objectRoutes);
 
-const userRouter = require("./routes/loginRegistration");
+const userRouter = require('./routes/loginRegistration');
 
-app.use("/users", userRouter);
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
+app.use('/users', userRouter);
 
-///////////////////////////////////////////////////////////////
-//              DASHBOARD
-///////////////////////////////////////////////////////////////
+const navigationRoutes = require('./routes/navigationMenu');
 
-app.get("/edit-profile", async (req, res) => {
-  const id = req.session.user.userId;
-  const { username, first_name, last_name } = req.session.user;
+app.use('/navigation', authenticateMiddleware, navigationRoutes);
 
-  try {
-    const user = await models.User.findAll({
-      where: {
-        id: id,
-        username: username,
-        first_name: first_name,
-        last_name: last_name,
-      },
-    });
-    // res.json(user);
-    res.render("edit-profile", {
-      id: id,
-      username: username,
-      first_name: first_name,
-      last_name: last_name,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
 
-function uploadFile(req, callback) {
-  new formidable.IncomingForm()
-    .parse(req)
-    .on("fileBegin", (name, file) => {
-      file.path = __basedir + "/uploads/" + file.name;
-    })
-    .on("file", (name, file) => {
-      callback(file.name);
-    });
-}
-
-app.post("/upload", (req, res) => {
-  uploadFile(req, (photoURL) => {
-    res.send("UPLOAD");
-  });
-});
-
-app.get("/homepage", async (req, res) => {
-  const { first_name, last_name } = req.session.user;
-  res.render("homepage", {
-    first_name: first_name,
-    last_name: last_name,
-  });
-});
-
-app.post("/logout", (req, res) => {
-  if (req.session) {
-    req.session.destroy();
-  }
-  res.redirect("/registration");
-});
-
-app.get("/", (req, res) => {
-  res.redirect("/users/registration");
+app.get('/', (req, res) => {
+  res.redirect('/users/registration');
 });
 
 ///////////////////////////////////////////////////////////////
 
 // table for household
+<<<<<<< HEAD
 app.get('/homepage/household-members', (req, res) => {
   res.render('household-members')
 })
+=======
+app.get('/household-members', (req, res) => {
+  res.render('household-members');
+});
+
+app.get('/create-room', (req, res) => {});
+
+//////////////////////////////////////////////////////////////
+>>>>>>> ed6a95baa74e2a259c1e8480517d336fcc791f47
 
 app.get('/homepage/create-room', (req, res) => {
   res.render('homepage')
