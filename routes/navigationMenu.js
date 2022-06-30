@@ -7,26 +7,56 @@ const navigationRoutes = express.Router();
 //              DASHBOARD
 ///////////////////////////////////////////////////////////////
 
-navigationRoutes.get('/edit-profile', async (req, res) => {
-  const id = req.session.user.userId;
-  const { username, first_name, last_name } = req.session.user;
+// navigationRoutes.get('/edit-profile', async (req, res) => {
+//   const id = req.session.user.userId;
+//   const { username, first_name, last_name, profilePicture } = req.session.user;
 
+//   try {
+//     const user = await models.User.findAll({
+//       where: {
+//         id: id,
+//         username: username,
+//         first_name: first_name,
+//         last_name: last_name,
+//         profilePicture: profilePicture,
+//       },
+//     });
+//     // res.json(user);
+//     res.render('edit-profile', {
+//       id: id,
+//       username: username,
+//       first_name: first_name,
+//       last_name: last_name,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+// navigationRoutes.get('/edit-profile/:id', async (req, res) => {
+//   const id = req.params.session.userId;
+//   console.log(id);
+
+//   const user = await models.User.findByPk(id);
+//   res.json(user);
+//   // res.render('edit-profile', user.dataValues);
+// });
+
+navigationRoutes.post('/edit-profile', async (req, res) => {
+  const id = req.session.user.userId;
+  const profilePicture = req.body.profilePicture;
   try {
-    const user = await models.User.findAll({
-      where: {
-        id: id,
-        username: username,
-        first_name: first_name,
-        last_name: last_name,
-      },
-    });
-    // res.json(user);
-    res.render('edit-profile', {
+    const user = models.Users.build({
       id: id,
-      username: username,
-      first_name: first_name,
-      last_name: last_name,
+      profilePicture: photoURL,
     });
+    const persistedUser = await user.save();
+    console.log(persistedUser);
+    if (persistedUser != null) {
+      res.redirect('/navigation/homepage');
+    } else {
+      res.send('nothing happened');
+    }
   } catch (error) {
     console.log(error);
   }
@@ -34,7 +64,7 @@ navigationRoutes.get('/edit-profile', async (req, res) => {
 
 navigationRoutes.post('/upload', function (req, res) {
   const id = req.session.user.userId;
-  const { username, first_name, last_name } = req.session.user;
+  const { username, first_name, last_name, profilePicture } = req.session.user;
   let sampleFile;
   let uploadPath;
 
@@ -46,18 +76,18 @@ navigationRoutes.post('/upload', function (req, res) {
 
   sampleFile = req.files.sampleFile;
 
-  uploadPath = path.join(__dirname, '..', 'static', 'uploads', sampleFile.name) ;
-  console.log(uploadPath)
+  uploadPath = path.join(__dirname, '..', 'static', 'uploads', sampleFile.name);
+  console.log(uploadPath);
 
   sampleFile.mv(uploadPath, function (err) {
     if (err) {
-      console.log(uploadPath)
+      console.log(uploadPath);
       return res.status(500).send(err);
     }
     photoURL = path.join('..', 'uploads', sampleFile.name);
     console.log(`${photoURL}`);
     res.render('edit-profile', {
-      photoURL: photoURL,
+      profilePicture: photoURL,
       id: id,
       username: username,
       first_name: first_name,
@@ -69,10 +99,7 @@ navigationRoutes.post('/upload', function (req, res) {
 navigationRoutes.get('/homepage', async (req, res) => {
   const { first_name, last_name } = req.session.user;
   try {
-
-
-    res.render("room-dashboard-display", {
-
+    res.render('room-dashboard-display', {
       first_name: first_name,
       last_name: last_name,
       username: req.session.user.username,
