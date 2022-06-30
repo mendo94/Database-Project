@@ -56,19 +56,13 @@ clientRouter.post('/create-item/:roomId', async (req, res) => {
   });
   const persistedItem = await item.save();
   if (persistedItem != null) {
-    res.redirect('/navigation/homepage');
+
+    res.redirect(`/room-view/${req.params.roomId}`);
+
   } else {
-    res.render('/create-box', {
+    res.render('object-creation/create-item', {
       message: 'Unable to create item',
     });
-    const persistedItem = await item.save();
-    if (persistedItem != null) {
-      res.redirect(`/navigation/room-view/${req.params.roomId}`);
-    } else {
-      res.render('object-creation/create-item', {
-        message: 'Unable to create item',
-      });
-    }
   }
 });
 

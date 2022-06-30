@@ -1,7 +1,6 @@
-const express = require("express");
+const express = require('express');
 const userRouter = express.Router();
-const bcrypt = require("bcryptjs");
-// const models = require("../models");
+const bcrypt = require('bcryptjs');
 
 const SALT_ROUNDS = 10;
 
@@ -9,7 +8,7 @@ const SALT_ROUNDS = 10;
 //              LOGIN
 ///////////////////////////////////////////////////////////////
 
-userRouter.post("/registration", async (req, res) => {
+userRouter.post('/registration', async (req, res) => {
   const { username, password, first_name, last_name } = req.body;
 
   const persistedUser = await models.User.findOne({
@@ -20,7 +19,7 @@ userRouter.post("/registration", async (req, res) => {
   if (persistedUser == null) {
     bcrypt.hash(password, SALT_ROUNDS, async (error, hash) => {
       if (error) {
-        res.render("registration", { message: "Error, user was not created" });
+        res.render('registration', { message: 'Error, user was not created' });
       } else {
         const user = models.User.build({
           username: username,
@@ -30,24 +29,24 @@ userRouter.post("/registration", async (req, res) => {
         });
         const savedUser = await user.save();
         if (savedUser != null) {
-          res.redirect("/users/login");
+          res.redirect('/users/login');
         } else {
-          res.render("/users/registration", {
-            message: "Username already exists!",
+          res.render('/users/registration', {
+            message: 'Username already exists!',
           });
         }
       }
     });
   } else {
-    res.render("registration", { message: "Username already exists!" });
+    res.render('registration', { message: 'Username already exists!' });
   }
 });
 
-userRouter.get("/registration", (req, res) => {
-  res.render("registration");
+userRouter.get('/registration', (req, res) => {
+  res.render('registration');
 });
 
-userRouter.post("/login", async (req, res) => {
+userRouter.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   const user = await models.User.findOne({
@@ -66,26 +65,33 @@ userRouter.post("/login", async (req, res) => {
             last_name: user.last_name,
           };
           console.log(user);
-          res.redirect("/navigation/homepage");
+          res.redirect('/homepage');
         }
       } else {
-        res.render("login", { message: "Incorrect username or password" });
+        res.render('login', { message: 'Incorrect username or password' });
       }
     });
   } else {
-    res.redirect("/users/login", { message: "Incorrect username or password" });
+    res.redirect('/users/login', { message: 'Incorrect username or password' });
   }
 });
 
-userRouter.get("/login", (req, res) => {
-  res.render("login");
+userRouter.get('/login', (req, res) => {
+  res.render('login');
 });
 
-userRouter.post("/logout", (req, res) => {
+userRouter.get('/logout', (req, res, next) => {
   if (req.session) {
-    req.session.destroy();
+    req.session.destroy((error) => {
+      if (error) {
+        next(error);
+      } else {
+        res.render('login', {
+          logoutMessage: 'User was successfully logged out',
+        });
+      }
+    });
   }
-  res.redirect("/users/registration");
 });
 
 module.exports = userRouter;

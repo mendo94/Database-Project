@@ -3,15 +3,13 @@ const app = express();
 const mustacheExpress = require('mustache-express');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-const formidable = require('formidable');
+const fileUpload = require('express-fileupload');
 const path = require('path');
 
-const VIEWS_PATH = path.join(__dirname, '/views');
-const __basedir = __dirname;
 global.models = require('./models');
 
 const PORT = 8080;
-app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'));
+const VIEWS_PATH = path.join(__dirname, '/views');
 
 app.use(
   session({
@@ -20,16 +18,19 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'));
 app.use(express.urlencoded());
 
+app.use(fileUpload());
 app.set('views', VIEWS_PATH);
 app.set('view engine', 'mustache');
 
+app.use('/uploads', express.static(path.join(__dirname, '/routes/uploads')));
 app.use(express.static('static'));
 app.use('/js', express.static('static'));
 app.use('/css', express.static('static'));
 app.use('/img', express.static('static'));
-app.use('/uploads', express.static('static'));
 
 ///////////////////////////////////////////////////////////////
 //              Setup route for client side access
@@ -53,13 +54,6 @@ const navigationRoutes = require('./routes/navigationMenu');
 app.use('/navigation', authenticateMiddleware, navigationRoutes);
 
 
-app.post('/logout', (req, res) => {
-  if (req.session) {
-    req.session.destroy();
-  }
-  res.redirect('/registration');
-});
-
 app.get('/', (req, res) => {
   res.redirect('/users/registration');
 });
@@ -72,6 +66,8 @@ app.get('/household-members', (req, res) => {
 });
 
 app.get('/create-room', (req, res) => {});
+
+//////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

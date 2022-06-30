@@ -24,7 +24,9 @@
                       <div class="mx-auto" style="width: 140px;">
                         <div class="d-flex justify-content-center align-items-center rounded"
                           style="height: 140px; background-color: rgb(233, 236, 239);">
-                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"><img class="profile-pic"
+                              src="{{photoURL}}" alt=""></span>
+
                         </div>
                       </div>
                     </div>
@@ -34,7 +36,13 @@
                         <p class="mb-0">@{{username}}</p>
                         <div class="text-muted"><small></small></div>
                         <div class="mt-2">
-                          <input type="file" name="photo">
+                          <form ref='uploadForm' id='uploadForm' action='/navigation/upload' method='POST'
+                            encType="multipart/form-data">
+                            <input type="file" name="sampleFile" />
+                            <input type='submit' value='Upload!' />
+                          </form>
+
+
 
                         </div>
                       </div>
