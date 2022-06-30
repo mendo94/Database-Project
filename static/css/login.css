@@ -9,8 +9,34 @@ html {
   box-sizing: border-box;
 }
 
+.navbar-collapse {
+  z-index: 99;
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+.btn {
+  width: 200px;
+  height: 33px;
+  font-size: 17px;
+  z-index: -1;
+}
+
 .gradient-custom-4 {
   background: linear-gradient(to right, rgb(132, 250, 236), rgb(102, 197, 244));
+}
+
+h4 {
+  font-size: 4rem;
+}
+
+.list-unstyled {
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.started {
+  font-size: 2rem;
 }
 
 .close-modal {
@@ -57,7 +83,6 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 33%;
-  /* height: 95%; */
   background-color: white;
   padding: 6rem;
   border-radius: 5px;
@@ -81,8 +106,8 @@ html {
 }
 
 .form-check-input {
-  position: inherit;
-  margin-right: 7px;
+  /* position: inherit; */
+  margin-right: 205px;
   margin-top: 0;
 }
 
@@ -117,7 +142,7 @@ html {
 }
 
 .bg {
-  background-image: url("img/hero-img.png");
+  background-image: url('img/hero-img.png');
   height: 90%;
   background-position: center;
   background-repeat: no-repeat;
@@ -208,15 +233,44 @@ iframe {
 /* MEDIA QUERIES */
 /* ****************************************** */
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .nav-item {
     width: 100%;
     text-align: left;
     padding-left: 10px;
   }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-  /* .dropdown-menu {
-    left: 0 !important;
-    position: relative !important;
-    padding: 20px; */
+  .py-4 {
+    padding-top: 100px;
+  }
+
+  #myModal {
+    width: 70%;
+  }
+
+  .registration-menu {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 517px) {
+  .nav-item {
+    width: 50%;
+    text-align: left;
+    padding-left: 10px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .py-4 {
+    padding-top: 100px;
+  }
 }
