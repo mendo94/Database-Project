@@ -30,11 +30,11 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
         <li class="nav-item active">
-          <a class="nav-link" href="#!"><button class="show-modal">Get Started</button><span
+          <a class="nav-link" onclick="openModal('registrationMenu', 'registrationOverlay')"><button class="show-modal">Get Started</button><span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users/login"><button class="show-login-modal">Login</button></a>
+          <a class="nav-link" onclick="openLoginModal('loginMenu', 'loginOverlay')"><button class="show-login-modal">Login</button></a>
         </li>
       </ul>
     </div>
@@ -81,11 +81,11 @@
   </section>
   <!-- Registration Modal -->
 
-  <div class="registration-menu hidden">
+  <div id="registrationMenu" class="registration-menu hidden">
     <div class="img-container">
       <img src="/img/logo.png" alt="">
     </div>
-    <button class="close-modal">&times;</button>
+    <button class="close-modal" onclick="closeModal('registrationMenu', 'registrationOverlay')">&times;</button>
     <form action="/users/registration" method="POST">
       <div class="first-last-name form-outline mb-4">
         <input type="text" name="first_name" class="form-control form-control-lg" />
@@ -125,16 +125,16 @@
             here</u></a></p>
     </form>
   </div>
-  <div class="overlay hidden"></div>
+  <div id="registrationOverlay" class="overlay hidden" onclick="closeModal('registrationMenu, registrationOverlay')"></div>
 
 
   <!-- Login Modal -->
 
-  <div class="hide">
+  <div id="loginMenu" class="login-menu {{^loginPage}}hidden{{/loginPage}}">
     <div class="img-container">
       <img src="/img/logo.png" alt="">
     </div>
-    <button class="close-login-modal">&times;</button>
+    <button class="close-login-modal" onclick="closeLoginModal('loginMenu', 'loginOverlay')">&times;</button>
     <form action="/users/login" method="POST">
       <div class="form-outline mb-4">
         <input type="text" name="username" class="form-control form-control-lg" />
@@ -145,6 +145,22 @@
         <input type="password" name="password" class="form-control form-control-lg" />
         <label class="form-label">Enter Password</label>
       </div>
+      {{#errorMessage}}
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+      {{/errorMessage}}
+      {{#message}}
+      <div class="alert alert-danger" role="alert">
+
+        {{message}}
+      </div>
+      {{/message}}
+      {{#logoutMessage}}
+      <div class="alert alert-success" role="alert">
+        {{logoutMessage}}
+      </div>
+      {{/logoutMessage}}
 
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
@@ -154,7 +170,7 @@
             up!</u></a></p>
     </form>
   </div>
-  <div class="login-overlay hide"></div>
+  <div id="loginOverlay" class="login-overlay {{^loginPage}}hidden{{/loginPage}}" onclick="closeLoginModal('loginMenu', 'loginOverlay')"></div>
 
   <!-- FOOTER -->
 

@@ -4,12 +4,14 @@ function authenticateMiddleware(req, res, next) {
     if (req.session.user) {
       next();
     } else {
-      res.render("login", {
+      res.render("registration", {
+        loginPage: true,
         errorMessage: "Please sign in to continue",
       });
     }
   } else {
-    res.render("login", {
+    res.render("registration", {
+      loginPage: true,
       errorMessage: "Please sign in to continue",
     });
   }
