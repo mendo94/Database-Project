@@ -8,7 +8,7 @@ global.path = require('path');
 
 global.models = require('./models');
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const VIEWS_PATH = path.join(__dirname, '/views');
 
 app.use(
@@ -22,9 +22,11 @@ app.use(
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'));
 app.use(express.urlencoded());
 
-app.use(fileUpload({
-  createParentPath: true,
-}));
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
 app.set('views', VIEWS_PATH);
 app.set('view engine', 'mustache');
 
@@ -54,7 +56,6 @@ app.use('/users', userRouter);
 const navigationRoutes = require('./routes/navigationMenu');
 
 app.use('/navigation', authenticateMiddleware, navigationRoutes);
-
 
 app.get('/', (req, res) => {
   res.redirect('/users/registration');
