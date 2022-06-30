@@ -65,7 +65,7 @@ userRouter.post('/login', async (req, res) => {
             last_name: user.last_name,
           };
           console.log(user);
-          res.redirect('/homepage');
+          res.redirect('/navigation/homepage');
         }
       } else {
         res.render('login', { message: 'Incorrect username or password' });
