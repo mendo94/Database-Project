@@ -29,7 +29,7 @@
 ## Site Preview
 
 <div id="site-preview" align="center">
-  <img src="images/project-3.gif" width="100%"/>
+  <img src="static/img/dragndrop.gif" width="100%"/>
 </div>
 
 <!-- Web Demo -->
