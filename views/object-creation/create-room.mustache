@@ -4,20 +4,20 @@
 <head>
 
   {{>header}}
-  <title>Create New Room</title>
+  
 </head>
 
 <body>
   {{>navigation-menu}}
 
-
+  <h1>Create New Room</h1>
   <form action="/object-handling/create-room" method="POST">
     <div class="form-group">
       <label for="formGroupExampleInput bg-light">Give your Room a name</label>
       <input type="text" class="form-control" id="formGroupExampleInput" name="room"
         placeholder="Enter new category">
     </div>
-    <button id="sidebarCollapse" type="submit"
+    <button type="submit"
       class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
       New
       Container</button>

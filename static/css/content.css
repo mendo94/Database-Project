@@ -27,10 +27,6 @@ main {
   opacity: 0.5px;
 }
 
-.box-storage {
-  display: flex;
-  padding: 10px;
-}
 
 .profile-pic {
   width: 140px;

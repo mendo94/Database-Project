@@ -4,18 +4,19 @@
 <head>
 
   {{>header}}
-  <title>Create New Item For {{containerName}}</title>
+  
 </head>
 
 <body>
   {{>navigation-menu}}
+  <h1>Create New Item</h1>
   <form action="/object-handling/create-item/{{roomId}}" method="POST">
     <div class="form-group">
       <label for="formGroupExampleInput bg-light">Give a name for your item</label>
       <input type="text" class="form-control" id="formGroupExampleInput" name="item"
         placeholder="Enter new item name">
     </div>
-    <button id="sidebarCollapse" type="submit" name="containerId" value="{{containerId}}"
+    <button type="submit" name="containerId" value="{{containerId}}"
       class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
       New
       Container</button>

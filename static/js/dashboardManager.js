@@ -100,7 +100,9 @@ function createTable () {
         <button id="boxEditButton-${container.id}" onclick="updateObjectStart(${container.id}, 'box')" class="btn content-btn card-link">Edit Box</button>
         <a class="btn content-btn" href="/object-handling/delete/box/room-view/${container.id}/?roomId=${roomId.innerHTML}">Delete Box</a>
 
-        <a class="btn content-btn"href="/object-handling/create-item/${roomId.innerHTML}/${container.box}/${container.id}">Make new Item for Box</a>
+        <form action="/object-handling/create-item/${roomId.innerHTML}/${container.id}">
+            <button class="btn content-btn" name="containerName" value="${container.box}">Register new Item for Box</button>
+        </form>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
             ${itemsElements.join('')}
           Drag Item Here

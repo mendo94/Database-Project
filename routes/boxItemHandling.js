@@ -15,11 +15,11 @@ clientRouter.get('/create-box/:page/:roomId', async (req, res) => {
 });
 
 clientRouter.get(
-  '/create-item/:roomId/:containerName/:containerId',
+  '/create-item/:roomId/:containerId',
   async (req, res) => {
     res.render('object-creation/create-item', {
       containerId: req.params.containerId,
-      containerName: req.params.containerName,
+      containerName: req.body.containerName,
       roomId: req.params.roomId,
       profilePicture: req.session.user.profilePicture,
       id: req.session.user.userId,
