@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    {{>header}}
+  </head>
 
-<head>
-
-  {{>header}}
-  
-</head>
-
-<body>
-  {{>navigation-menu}}
-  <h1>Create New Item</h1>
-  <form action="/object-handling/create-item/{{roomId}}" method="POST">
-    <div class="form-group">
-      <label for="formGroupExampleInput bg-light">Give a name for your item</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" name="item"
-        placeholder="Enter new item name">
+  <body>
+    {{>navigation-menu}}
+    <div class="horizontalNav">
+      <a
+        class="btn content-btn rounded-pill"
+        href="/navigation/view-room/{{ roomId }}"
+        >Back</a
+      >
     </div>
-    <button type="submit" name="containerId" value="{{containerId}}"
-      class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create
-      New
-      Container</button>
-  </form>
+    <div class="pageBody">
+      <h1 class="pageTitle">Create New Item</h1>
+      <form action="/object-handling/create-item/{{ roomId }}" method="POST">
+        <div class="form-group">
+          <label for="formGroupExampleInput bg-light"
+            >Give a name for your item</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput"
+            name="item"
+            placeholder="Enter new item name"
+          />
+        </div>
+        <button
+          type="submit"
+          name="containerId"
+          value="{{ containerId }}"
+          class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4"
+        >
+          Create New Container
+        </button>
+      </form>
 
-  {{^message}}
-  {{/message}}
-</body>
-
+      {{^message}}
+      {{/message}}
+    </div>
+  </body>
 </html>
