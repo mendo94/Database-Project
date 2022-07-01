@@ -72,13 +72,13 @@ function createTable() {
                   value="${box.box}">
               </div>
               <button id="boxEditConfirm-${box.id}" name="id" value="${box.id}" type="submit"
-                class="content-btn btn bg-light rounded-pill">
+              class="btn content-btn">
                 Confirm</button>
             </form>
 
-        <button id="boxEditButton-${box.id}" onclick="updateObjectStart(${box.id}, 'box')" class="card-link">Edit Box</button>
+        <button id="boxEditButton-${box.id}" onclick="updateObjectStart(${box.id}, 'box')" class="btn content-btn">Edit Box</button>
 
-              <a href="/object-handling/delete/box/room/${box.id}" class="card-link">Delete Box</a>
+              <a class="btn content-btn" href="/object-handling/delete/box/room/${box.id}" >Delete Box</a>
             </div>
           </div>`
         })
@@ -89,14 +89,13 @@ function createTable() {
                 <input type="text" class="form-control" id="formGroupExampleInput" name="name"
                   value="${container.name}">
               </div>
-              <button id="roomEditConfirm-${container.id}" name="id" value="${container.id}" type="submit"
-                class="content-btn btn bg-light rounded-pill">
+              <button class="btn content-btn" id="roomEditConfirm-${container.id}" name="id" value="${container.id}" type="submit">
                 Confirm</button>
         </form>
 
-        <button id="roomEditButton-${container.id}" onclick="updateObjectStart(${container.id}, 'room')" class="card-link">Rename Room</button>
-        <a href="/navigation/room-view/${container.id}">Modify Room</a>
-        <a href="/object-handling/delete/room/${container.id}">Delete Room</a>
+        <button class="btn content-btn" id="roomEditButton-${container.id}" onclick="updateObjectStart(${container.id}, 'room')" >Rename Room</button>
+        <a class="btn content-btn" href="/navigation/room-view/${container.id}">Modify Room</a>
+        <a class="btn content-btn" href="/object-handling/delete/room/${container.id}">Delete Room</a>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
             ${boxElements.join('')}
           Drag Item Here

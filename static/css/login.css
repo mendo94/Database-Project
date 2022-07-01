@@ -172,16 +172,17 @@ html {
 .text-overlay {
   position: absolute;
   font-size: 14rem;
-  color: white;
   top: 40%;
   left: 12%;
 }
 
 .overlay-h1 {
   font-size: 5.5rem;
+    text-shadow: 0px 0px 3px grey;
 }
 .overlay-h3 {
   font-size: 3.5rem;
+    text-shadow: 0px 0px 3px grey;
 }
 
 .logo-image {
@@ -245,19 +246,27 @@ html {
 }
 
 iframe {
-  width: 145rem;
-  height: 379px;
+  width: 90%;
 }
 /* ****************************************** */
 /* MEDIA QUERIES */
 /* ****************************************** */
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
   .nav-item {
     width: 100%;
     text-align: left;
     padding-left: 10px;
   }
+
+  .bg {
+    height: 40%;
+  }
+
+  .iframe {
+    height: fit-content;
+  }
+
   .card {
     display: flex;
     flex-direction: column;
@@ -275,9 +284,10 @@ iframe {
   .registration-menu {
     width: 70%;
   }
-}
+  .login-menu {
+    width: 90%;
+  }
 
-@media screen and (max-width: 517px) {
   .nav-item {
     width: 50%;
     text-align: left;
@@ -291,5 +301,11 @@ iframe {
 
   .py-4 {
     padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .text-overlay {
+    top: 0%;
   }
 }
