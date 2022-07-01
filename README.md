@@ -14,6 +14,35 @@
  <li>Create an inventory of all the loose items hidden away in the attic, storage unit, or basement. Instead of tearing everything apart, just check where you have it located in your dashboard.</li>
  </ul>
 
+<!-- LIVE LINK -->
+
+## Live Link
+
+<a href="https://still-crag-62676.herokuapp.com/">https://still-crag-62676.herokuapp.com/</a>
+
+<!-- SITE PREVIEW -->
+
+## Site Preview
+
+<div id="site-preview" align="center">
+  <img src="static/img/dragndrop.gif" width="100%"/>
+</div>
+<div id="site-preview" align="center">
+  <img src="static/img/editprofile.gif" width="100%"/>
+</div>
+
+<!-- Web Demo -->
+
+## Web Demo
+
+## Database:
+
+This project was built using PostgreSQL with Sequelize-Object Relational Mapping
+
+## Featured programs:
+
+HTML, CSS, Bootstrap, JavaScript, Node.js, Mustache-express, JQuery
+
 <!-- AUTHORS-->
 
 ## Site was Built By:
@@ -23,26 +52,5 @@
 <a href="https://github.com/vollmetal">Sarah Avins</a>
 
 <a href="https://github.com/iamAlitkhan">Ali Khan</a>
-
-<!-- SITE PREVIEW -->
-
-## Site Preview
-
-<div id="site-preview" align="center">
-  <img src="static/img/dragndrop.gif" width="100%"/>
-</div>
-
-<!-- Web Demo -->
-
-## Web Demo
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-Project could not have been made without the help of:
-
-- [Bootstrap Cheat Sheet](https://hackerthemes.com/bootstrap-cheatsheet/)
-- [Font Awesome](https://fontawesome.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
