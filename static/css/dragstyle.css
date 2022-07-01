@@ -1,38 +1,42 @@
 .hide {
-    display: none;
+  display: none;
 }
 
 .testArea {
-    display: flex;
-    flex-wrap: wrap;
-
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .drag-over {
-    border: dashed 3px red;
+  border: dashed 3px red;
 }
 
 .box-drag-position {
-    padding: 1rem;
-    background-color: green;
-    margin: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  margin: 1rem;
 }
 
 .boxItem {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #box-position-holder {
-    
-    display: flex;
-    flex-wrap: wrap;
-    
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .box-storage {
-    display: flex;
-    flex-direction: column;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-image: linear-gradient(to right, #bc6eb9, #bfe9ff);
+}
+
+h1,
+h4 {
+  text-align: center;
+  font-weight: 300 !important;
 }

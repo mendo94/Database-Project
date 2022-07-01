@@ -70,7 +70,9 @@ userRouter.post('/login', async (req, res) => {
           res.redirect('/navigation/homepage');
         }
       } else {
-        res.render('registration', { message: 'Incorrect username or password' });
+        res.render('registration', {
+          message: 'Incorrect username or password',
+        });
       }
     });
   } else {
@@ -79,7 +81,7 @@ userRouter.post('/login', async (req, res) => {
 });
 
 userRouter.get('/login', (req, res) => {
-  res.render('registration', {loginPage: true,});
+  res.render('registration', { loginPage: true });
 });
 
 userRouter.get('/logout', (req, res, next) => {

@@ -82,6 +82,12 @@
   }
 }
 
+/* @media screen and (max-width: 533px) {
+  #sidebar {
+    position: sticky;
+  }
+} */
+
 /*
 *
 * ==========================================

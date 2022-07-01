@@ -10,16 +10,35 @@ html {
 }
 
 .navbar-collapse {
-  z-index: 99;
+  z-index: 5;
   font-size: 2.5rem;
   font-weight: bolder;
 }
 
-.btn {
+a button.btn {
+  letter-spacing: 2px;
   width: 200px;
-  height: 33px;
+  height: 38px;
   font-size: 17px;
-  z-index: -1;
+  font-weight: bold;
+  color: rgb(0, 0, 0) !important;
+  margin: 0px 5px;
+  border: 3px solid rgb(212, 221, 241);
+  box-shadow: 0 3rem 5rem rgba(0, 0.2, 0.2, 0.3);
+  transition: 0.5s;
+}
+
+a button.btn:hover {
+  color: rgb(249, 245, 245) !important;
+  font-size: 19px;
+  background: linear-gradient(to left, rgb(159, 236, 227), rgb(9, 140, 192));
+  box-shadow: 0 3rem 5rem rgba(0, 0.2, 0.4, 0.5);
+}
+
+div button.btn {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(90, 87, 87);
 }
 
 .gradient-custom-4 {

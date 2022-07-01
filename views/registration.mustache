@@ -31,11 +31,12 @@
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
         <li class="nav-item active">
 
-          <a class="nav-link" onclick="openModal('registrationMenu', 'registrationOverlay')"><button class="show-modal">Get Started</button><span
-              class="sr-only">(current)</span></a>
+          <a class="nav-link" onclick="openModal('registrationMenu', 'registrationOverlay')"><button id="btn"
+              class="btn show-modal gradient-custom-4">Get Started</button><span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="openLoginModal('loginMenu', 'loginOverlay')"><button class="show-login-modal">Login</button></a>
+          <a class="nav-link" onclick="openLoginModal('loginMenu', 'loginOverlay')"><button id="btn"
+              class="btn show-login-modal gradient-custom-4">Login</button></a>
 
         </li>
       </ul>
@@ -141,7 +142,8 @@
             here</u></a></p>
     </form>
   </div>
-  <div id="registrationOverlay" class="overlay hidden" onclick="closeModal('registrationMenu, registrationOverlay')"></div>
+  <div id="registrationOverlay" class="overlay hidden" onclick="closeModal('registrationMenu, registrationOverlay')">
+  </div>
 
 
   <!-- Login Modal -->
@@ -176,17 +178,19 @@
       <div class="alert alert-success" role="alert">
         {{logoutMessage}}
       </div>
-      {{/logoutMessage}}
-
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
-      </div>
-
-      <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="#!" class="fw-bold text-body"><u>Sign
-            up!</u></a></p>
-    </form>
   </div>
-  <div id="loginOverlay" class="login-overlay {{^loginPage}}hidden{{/loginPage}}" onclick="closeLoginModal('loginMenu', 'loginOverlay')"></div>
+  {{/logoutMessage}}
+
+  <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+  </div>
+  </form>
+
+  <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="#!" class="fw-bold text-body"><u>Sign
+        up!</u></a></p>
+  </div>
+  <div id="loginOverlay" class="login-overlay {{^loginPage}}hidden{{/loginPage}}"
+    onclick="closeLoginModal('loginMenu', 'loginOverlay')"></div>
 
   <!-- FOOTER -->
 
