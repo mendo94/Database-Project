@@ -1,9 +1,6 @@
 // select the item element
 const item = document.querySelector('.boxItem');
 
-// attach the dragstart event handler
-item.addEventListener('dragstart', dragStart);
-
 // handle the dragstart
 
 function dragStart(ev) {

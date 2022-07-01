@@ -32,3 +32,17 @@ main {
   width: 140px;
   height: auto;
 }
+
+.horizontalNav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.pageTitle {
+  margin: 1rem;
+}
+
+.pageBody {
+  display: flex;
+  flex-direction: column;
+}

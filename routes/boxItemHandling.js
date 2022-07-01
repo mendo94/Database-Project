@@ -143,6 +143,24 @@ clientRouter.get('/delete/item/:roomId/:id', async (req, res) => {
 });
 
 clientRouter.get('/delete/room/:id', async (req, res) => {
+  let containers = await models.Container.findAll({
+    where: {
+      roomId: req.params.id,
+    },
+  });
+  containers.forEach(async (container) => {
+    await models.Item.destroy({
+      where: {
+        containerId: container.id,
+      },
+    });
+  });
+  
+  await models.Container.destroy({
+    where: {
+      roomId: req.params.id,
+    },
+  });
   await models.Room.destroy({
     where: {
       id: req.params.id,

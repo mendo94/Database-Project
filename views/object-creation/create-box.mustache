@@ -9,7 +9,11 @@
 
 <body>
   {{>navigation-menu}}
-  <h1>Create New Box</h1>
+  <div class="horizontalNav">
+    <a class="btn content-btn rounded-pill" href="/navigation/view-room/{{roomId}}">Back</a>
+  </div>
+  <div class="pageBody">
+    <h1 class="pageTitle">Create New Box</h1>
   <form action="/object-handling/create-box/{{page}}" method="POST">
     <div class="form-group">
       <label for="formGroupExampleInput bg-light">Give your container a name</label>
@@ -24,6 +28,8 @@
 
   {{^message}}
   {{/message}}
+  </div>
+  
 </body>
 
 </html>

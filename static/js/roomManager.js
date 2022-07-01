@@ -25,7 +25,6 @@ async function getCurrentStorage() {
             currentRooms = info
 
             roomsAvailable = info
-            console.log(roomsAvailable)
         })
         .catch(error => { return error })
 }

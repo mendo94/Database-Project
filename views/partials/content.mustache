@@ -1,15 +1,20 @@
 <section class="content-btn-container">
-  <a href="/object-handling/create-box/room-view/{{roomId}}">
-    <button type="button"
-      class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create a
-      new
-      box</button>
-  </a>
+  <div class="horizontalNav">
+    <a class="btn content-btn rounded-pill" href="/navigation/homepage">Back</a>
+    <a href="/object-handling/create-box/room-view/{{roomId}}">
+      <button type="button"
+        class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">Create a
+        new
+        box</button>
+    </a>
+  </div>
+  
 </section>
 <!--viewing containers -->
 <main>
+  <div class="pageBody">
+    <h1 class="pageTitle">Viewing {{currentRoom}}'s Contents</h1>
   
-  <h1>Viewing {{currentRoom}}'s Contents</h1>
   <div id="box-position-holder">
     <div class="box-storage">
       <div class="box-drag-position" id="drag{{number}}" ondragover="dragOver(event)" ondragleave="dragLeave(event)"
@@ -18,6 +23,8 @@
       </div>
     </div>
   </div>
+  </div>
+  
 
 
 </main>

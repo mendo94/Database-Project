@@ -1,6 +1,5 @@
 const boxOrganizer = document.getElementById('box-position-holder')
 const roomId = document.getElementById('roomId')
-console.log(roomId)
 
 let currentStorage = []
 let storagesAvailable = []
