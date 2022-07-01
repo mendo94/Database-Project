@@ -5,7 +5,7 @@
 <div id="header" align="center">
   <img src="static/img/logo.png" width="400"/>
 </div>
-<strong>Purpose of the app:</strong> Storage.io brings better organization to packing, moving and storing your belongings. You can use our application for any area in your life that needs more organization but here are a few examples:
+<strong>Purpose of the app:</strong> Storage.io brings better organization to packing, moving and storing your belongings. You can use our application for any area in your life that needs more organization but here are a few examples: <br><br>
 <ul>
 <li>
  if you are moving houses, use Storage.io to label each box or container, then add all of the items within that container and we will store those items in our database.
