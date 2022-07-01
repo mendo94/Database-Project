@@ -38,20 +38,18 @@ main {
 } */
 
 .content-btn {
-  /* width: 45%; */
-
-  display: block;
-  border: none;
-  padding: 2.1em 5em;
-  background-color: #fff;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.16) !important;
   font-weight: bold;
   font-size: 1.4em;
-  border-radius: 0px;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 1.1);
-  height: 60px;
+  margin: 0.5rem;
   text-align: center;
   opacity: 0.5px;
+}
+
+.box-storage {
+  display: flex;
+  padding: 10px;
 }
 
 .profile-pic {

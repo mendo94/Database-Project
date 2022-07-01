@@ -75,13 +75,13 @@ function createTable () {
                   value="${item.name}">
               </div>
               <button id="itemEditConfirm-${item.id}" name="id" value="${item.id}" type="submit"
-                class="content-btn btn bg-light rounded-pill">
+              class="btn content-btn">
                 Confirm</button>
             </form>
 
-              <button id="itemEditButton-${item.id}" onclick="updateObjectStart(${item.id}, 'item')" class="card-link">Edit Item</button>
+              <button id="itemEditButton-${item.id}" onclick="updateObjectStart(${item.id}, 'item')" class="btn content-btn">Edit Item</button>
 
-              <a href="/object-handling/delete/item/${roomId.innerHTML}/${item.id}" class="card-link">Delete Item</a>
+              <a href="/object-handling/delete/item/${roomId.innerHTML}/${item.id}" class="btn content-btn">Delete Item</a>
             </div>
           </div>`
         })
@@ -92,15 +92,15 @@ function createTable () {
                 <input type="text" class="form-control" id="formGroupExampleInput" name="name"
                   value="${container.box}">
               </div>
-              <button id="boxEditConfirm-${container.id}" name="id" value="${container.id}" type="submit"
-                class="content-btn btn bg-light rounded-pill">
+              <button  id="boxEditConfirm-${container.id}" name="id" value="${container.id}" type="submit"
+              class="btn content-btn">
                 Confirm</button>
             </form>
 
-        <button id="boxEditButton-${container.id}" onclick="updateObjectStart(${container.id}, 'box')" class="card-link">Edit Box</button>
-        <a href="/object-handling/delete/box/room-view/${container.id}/?roomId=${roomId.innerHTML}">Delete Box</a>
+        <button id="boxEditButton-${container.id}" onclick="updateObjectStart(${container.id}, 'box')" class="btn content-btn card-link">Edit Box</button>
+        <a class="btn content-btn" href="/object-handling/delete/box/room-view/${container.id}/?roomId=${roomId.innerHTML}">Delete Box</a>
 
-        <a href="/object-handling/create-item/${roomId.innerHTML}/${container.box}/${container.id}">Make new Item for Box</a>
+        <a class="btn content-btn"href="/object-handling/create-item/${roomId.innerHTML}/${container.box}/${container.id}">Make new Item for Box</a>
         <div class="box-drag-position" id="drag${container.id}" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
             ${itemsElements.join('')}
           Drag Item Here
