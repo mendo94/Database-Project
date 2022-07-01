@@ -50,7 +50,7 @@ navigationRoutes.post('/upload', async (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    photoURL = path.join('..', 'uploads', sampleFile.name);
+    photoURL = path.join('/', 'uploads', sampleFile.name);
     console.log(`${photoURL}`);
     const updateItem = await models.User.update(
       {
