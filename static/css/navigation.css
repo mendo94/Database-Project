@@ -65,7 +65,7 @@
   padding-left: 14px;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   #sidebar {
     margin-left: -17rem;
   }
