@@ -178,10 +178,12 @@ html {
 }
 
 .overlay-h1 {
+  color: white;
   font-size: 5.5rem;
   text-shadow: 0px 0px 3px grey;
 }
 .overlay-h3 {
+  color: white;
   font-size: 3.5rem;
   text-shadow: 0px 0px 3px grey;
 }
