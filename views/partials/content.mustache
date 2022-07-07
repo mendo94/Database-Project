@@ -1,29 +1,29 @@
 <section class="content-btn-container">
   <div class="horizontalNav">
-    <a class="btn content-btn rounded-pill" href="/navigation/homepage">Back</a>
-    <a class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4" href="/object-handling/create-box/room-view/{{roomId}}">
+    <a class="btn content-btn" href="/navigation/homepage">Back</a>
+    <a class="content-btn btn" href="/object-handling/create-box/room-view/{{roomId}}">
       Register a
-        new
-        box
+      new
+      box
     </a>
   </div>
-  
+
 </section>
 <!--viewing containers -->
 <main>
   <div class="pageBody">
     <h1 class="pageTitle">Viewing {{currentRoom}}'s Contents</h1>
-  
-  <div id="box-position-holder">
-    <div class="box-storage">
-      <div class="box-drag-position" id="drag{{number}}" ondragover="dragOver(event)" ondragleave="dragLeave(event)"
-        ondrop="drop(event)">
-        Place Box Here
+
+    <div id="box-position-holder">
+      <div class="box-storage">
+        <div class="box-drag-position" id="drag{{number}}" ondragover="dragOver(event)" ondragleave="dragLeave(event)"
+          ondrop="drop(event)">
+          Place Box Here
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  
+
 
 
 </main>

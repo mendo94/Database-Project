@@ -27,7 +27,6 @@ main {
   opacity: 0.5px;
 }
 
-
 .profile-pic {
   width: 140px;
   height: auto;
@@ -45,4 +44,16 @@ main {
 .pageBody {
   display: flex;
   flex-direction: column;
+}
+
+form > button {
+  width: 96%;
+}
+
+.name-container {
+  text-align: center !important;
+}
+
+.card-title {
+  font-size: 1rem;
 }
