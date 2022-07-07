@@ -8,18 +8,16 @@
 <body>
   {{>navigation-menu}}
   <div class="horizontalNav">
-    <a class="btn content-btn rounded-pill" href="/navigation/homepage">Back</a>
+    <a class="btn content-btn" href="/navigation/homepage">Back</a>
   </div>
   <div class="pageBody">
     <h1 class="pageTitle">Create New Room</h1>
     <form action="/object-handling/create-room" method="POST">
       <div class="form-group">
-        <label for="formGroupExampleInput bg-light">Give your Room a name</label>
         <input type="text" class="form-control" id="formGroupExampleInput" name="room"
-          placeholder="Enter new category"/>
+          placeholder="Enter new category" />
       </div>
-      <button type="submit"
-        class="content-btn btn bg-light text-black-50 rounded-pill text-uppercase font-weight-bold px-4 mb-4">
+      <button type="submit" class="content-btn btn bg-light text-black-50 text-uppercase font-weight-bold px-4 mb-4">
         Create New Container
       </button>
     </form>

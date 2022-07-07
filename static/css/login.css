@@ -24,7 +24,7 @@ a button.btn {
   font-weight: bold;
   color: rgb(0, 0, 0) !important;
   margin: 0px 5px;
-  border: 3px solid rgb(212, 221, 241);
+  /* border: 3px solid rgb(212, 221, 241); */
   box-shadow: 0 3rem 5rem rgba(0, 0.2, 0.2, 0.3);
   transition: 0.5s;
 }

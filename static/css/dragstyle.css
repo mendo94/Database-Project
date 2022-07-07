@@ -15,6 +15,8 @@
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.2) !important;
   margin: 1rem;
+  text-align: center;
+  font-weight: bold;
 }
 
 .boxItem {
@@ -32,7 +34,7 @@
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
-  background-image: linear-gradient(to right, #bc6eb9, #bfe9ff);
+  background-image: linear-gradient(to right, rgb(9, 140, 192), #bfe9ff);
   padding: 10px;
 }
 
@@ -40,4 +42,8 @@ h1,
 h4 {
   text-align: center;
   font-weight: 300 !important;
+}
+
+.dragBox {
+  font-size: 0.7rem;
 }

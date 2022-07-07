@@ -17,8 +17,7 @@
         <div class="row">
           <div class="col mb-3">
             <div id="card" class="card">
-              <div class="card-body"
-                style="color: rgb(20, 88, 226); font-family: Baskerville, serif; background-color: rgb(13 110 253 / 18%);">
+              <div class="card-body">
                 <div class="e-profile">
                   <div class="row">
                     <div class="col-12 col-sm-auto mb-3">
@@ -33,16 +32,14 @@
                     </div>
                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                       <div class="text-center text-sm-left mb-2 mb-sm-0">
-                        <h4 class="bg-info text-white">{{first_name}} {{last_name}}</h4>
+                        <h4 class="text-dark">{{first_name}} {{last_name}}</h4>
                         <p class="mb-0">@{{username}}</p>
                         <div class="text-muted"><small></small></div>
                         <div class="mt-2">
                           <form ref='uploadForm' id='uploadForm' action='/navigation/upload' method='POST'
                             encType="multipart/form-data">
-                            <button type="button" class="btn btn-primary"><input type="file" name="sampleFile"
-                                control-id="ControlID-1"></button>
-                            <button type="button" class="btn btn-primary"><input type="submit" value="Upload"
-                                control-id="ControlID-3"></button>
+                            <input type="file" name="sampleFile" control-id="ControlID-1">
+                            <input type="submit" value="Upload" control-id="ControlID-3">
                           </form>
 
 

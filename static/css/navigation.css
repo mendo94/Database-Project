@@ -34,7 +34,7 @@
 
 #sidebar {
   position: relative;
-  background: linear-gradient(to right, #b497da, #976e9e);
+  background: linear-gradient(to right, rgb(159, 236, 227), rgb(9, 140, 192));
 }
 
 #content.active {
@@ -55,7 +55,7 @@
 }
 
 .anchor-link:active {
-  background-color: rgb(202, 130, 202);
+  background-color: rgb(130, 183, 202);
 }
 
 .signout {
@@ -134,8 +134,12 @@
 
 body {
   background: #575b5e;
-  background: -webkit-linear-gradient(to right, #b497da, #976e9e);
-  background: linear-gradient(to right, #b497da, #976e9e);
+  background: -webkit-linear-gradient(
+    to right,
+    rgb(9, 140, 192),
+    rgb(159, 236, 227)
+  );
+  background: linear-gradient(to right, rgb(159, 236, 227), rgb(9, 140, 192));
   min-height: 100vh;
   /* overflow-x: hidden; */
 }
